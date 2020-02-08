@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.views import login
 from rest_framework.authtoken.views import obtain_auth_token
 from gamerankapi.core import views as grc_views
 
 
 urlpatterns = [
-    #url(r'^', grc_views.HelloView.as_view(), name='hello'),
     url(r'^api-token-auth/', obtain_auth_token, name='api_token_auth' ),
-    #url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
+    url(r'^login/', login, name='login'),
 ]
