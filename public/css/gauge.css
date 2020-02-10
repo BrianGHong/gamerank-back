@@ -1,3 +1,5 @@
+/* https://www.cssscript.com/animated-svg-gauge/ */
+
 .gauge-container {
     width: 200px;
     height: 200px;
@@ -5,18 +7,18 @@
     padding: 10px;
 }
 .gauge-container > .gauge > .dial {
-    stroke: #eee;
-    stroke-width: 6;
+    stroke: rgb(224, 224, 224);
+    stroke-width: 3;
     fill: rgba(0,0,0,0);
 }
 .gauge-container > .gauge > .value {
     stroke: rgb(255, 0, 0);
-    stroke-width: 8;
+    stroke-width: 10;
     fill: rgba(0,0,0,0);
 }
 .gauge-container > .gauge > .value-text {
-    fill: rgb(255, 255, 255);
-    font-family: sans-serif;
+    fill: rgb(0, 0, 0);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    font-size: 1.4em;
+    font-size: 1.5em;
 }

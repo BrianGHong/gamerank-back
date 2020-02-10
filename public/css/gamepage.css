@@ -1,0 +1,88 @@
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.trailer-img-wrap {
+    position: relative;
+    height: 98%;
+    width: 105%;
+}
+
+.watch-trailer {
+    font-size: 30px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.72);
+    color: rgb(255, 255, 255);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s, visibility .2s;
+    text-align: center;
+    padding-top: 30%;
+}
+
+.trailer-img-wrap:hover .watch-trailer {
+    visibility: visible;
+    opacity: 1;
+}
+
+.rating-button {
+    font-size: 20px;
+    border-radius: 30px;
+}
+
+.col-2 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.detail-card {
+    background-color: rgba(255, 255, 255, 0.85);  
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
+}
+
+.detail-card img {
+    border-radius: 10px;
+}
+
+.detail-card-info {
+    color: red;
+    font-weight: bold;
+}
+
+.quick-deets {
+   margin-top: 10px;
+}
+
+.quick-deets h5 {
+    margin: 1px;
+}
+
+.details-summary {
+    margin-top: 10px;
+    padding: 2px;
+    font-weight: bold;
+}
+
+/* Ratings */
+.rating-header {
+    text-align:center;    
+} 
+
+/* Comment Styling */
+.comment-date {
+    color: gray;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.comment-like-num {
+    color: gray;
+    font-style: italic;
+    font-size: 16px;
+}
