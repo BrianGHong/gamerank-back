@@ -2,4 +2,6 @@ runtime: php
 env: flex
 
 runtime_config:
-    document_root: web
+    document_root: .
+    front_controller_file: index.php
+    skip_lockdown_document_root: true

@@ -1,7 +1,15 @@
 /* https://www.cssscript.com/animated-svg-gauge/ */
 
+.rating-header {
+    text-align:center;    
+} 
+
+.mobile-rating {
+    margin: 0px 5px;
+}
+
 .gauge-container {
-    width: 200px;
+    width: 210px;
     height: 200px;
     display: block;
     padding: 10px;
@@ -22,3 +30,41 @@
     font-weight: bold;
     font-size: 1.5em;
 }
+
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (max-width: 1200px) {
+    .gauge-container {
+        width: 170px;
+        height: 170px;
+        display: block;
+        padding: 1
+    }
+    .rating-header {
+        font-size: 25px;
+    }
+}
+/* // Large devices (desktops, 992px and up) */
+@media (max-width: 992px) {
+    .gauge-container {
+        width: 150px;
+        height: 150px;
+        display: block;
+    }
+    .rating-header {
+        font-size: 20px;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+    
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+    .mobile-rating h2 {
+        font-size: 40px;
+    }
+}
+
