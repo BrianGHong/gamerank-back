@@ -41,7 +41,7 @@
 
 .detail-card {
     background-color: rgba(255, 255, 255, 0.85);  
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
+    
 }
 
 .detail-card img {
@@ -116,3 +116,8 @@
 @media (min-width: 1200px) {
 
 }
+A à B and A à C (decompose A à BC)
+A à E (transitive A à B and B à E)
+A à CF (transitive A à E and E à CF)
+A à G (FD given)
+Thus, A+ = { A, B, C, E, F, G }

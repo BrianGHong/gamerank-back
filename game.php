@@ -14,7 +14,22 @@
     $r2 = 78;
     $r3 = 21;
     $r4 = 72;
-    $r5 = 89;
+    $r5 = 100;
+    $r_usercount = 1432;
+
+    # Game Information
+    $g_title = "Fire Emblem: Three Houses";
+    $g_dor = "July 25th, 2019";
+    $g_dev = "Intelligent Systems, Nintendo";
+    $g_plat = "Nintendo Switch";
+    $g_genre = "Adventure, RPG, Tactics, Turn-Based Strategy";
+    $g_summary = "Here, order is maintained by the Church of Seiros, which hosts the prestigious Officer’s Academy within its headquarters. You are invited to teach one of its three mighty houses, each comprised of students brimming with personality and represented by a royal from one of three territories. As their professor, you must lead your students in their academic lives and in turn-based, tactical RPG battles wrought with strategic, new twists to overcome. Which house, and which path, will you choose? ";
+
+    $g_favcount = 2340;
+
+    $g_thumbnail = "https://images.igdb.com/igdb/image/upload/t_cover_big/co1n8t.jpg";
+    $g_background = "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ynbji1swyqkg0co3cgag.jpg";
+    $g_trailer = "https://www.youtube.com/watch?v=pIUTKOvPc4I";
 ?>
 <div style="display:none;">
     <var id="c1"><?php echo $c1?></var>
@@ -39,7 +54,7 @@
 <script src="public/js/gauge.min.js"></script>
 
 <div style="
-    background-image: url('https://images.igdb.com/igdb/image/upload/t_screenshot_big/ynbji1swyqkg0co3cgag.jpg');
+    background-image: url(<?php echo $g_background?>);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -49,38 +64,38 @@
         <div class="row">
             <div class="col-xl-3 col-lg-4 col-4">
                 <!-- Thumbnail -->
-                <a href="https://www.youtube.com/watch?v=pIUTKOvPc4I" class="trailer-link" target="_blank">
+                <a href="<? echo $g_trailer ?>" class="trailer-link" target="_blank">
                     <div class="trailer-img-wrap">
-                        <img class="trailer-img" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1n8t.jpg" />
+                        <img class="trailer-img" src="<?php echo $g_thumbnail ?>" />
                         <p class="watch-trailer"><i class="fa fa-play"></i><br>Watch Trailer!</p>
                     </div>
                 </a>
             </div>
             <div class="col-xl-9 col-lg-8 col-8">
-                <h1 class="game-title">Fire Emblem: Three Houses</h1>
+                <h1 class="game-title"><?php echo $g_title?></h1>
                 
                 <!-- Favorite -->
                 <form>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" style="border-radius: 20px;">
                         <i class="fa fa-heart"></i>
                             Favorite
                     </button>
-                    <span style="margin-left: 10px;">2213 favorites!</span>
+                    <span style="margin-left: 10px;"><?php echo $g_favcount ?> favorite(s)!</span>
                 </form>
 
                 <!-- Details -->
                 <!-- Desktop -->
                 <div class="d-none d-md-block">
                     <div class="quick-deets">
-                        <h5>Released: <span class="detail-card-info">July 25th, 2019</span></h5>
-                        <h5>Developer(s): <span class="detail-card-info">Intelligent Systems, Nintendo</span></h5>
-                        <h5>Platform(s): <span class="detail-card-info">Nintendo Switch</span></h5>
-                        <h5>Genre(s): <span class="detail-card-info">Adventure, RPG, Tactics, Turn-Based Strategy</span></h5>
+                        <h5>Released: <span class="detail-card-info"><?php echo $g_dor ?></span></h5>
+                        <h5>Developer(s): <span class="detail-card-info"><?php echo $g_dev ?></span></h5>
+                        <h5>Platform(s): <span class="detail-card-info"><?php echo $g_plat ?></span></h5>
+                        <h5>Genre(s): <span class="detail-card-info"><?php echo $g_genre ?></span></h5>
                     </div>
 
                     <!-- Summary -->
                     <div class="details-summary">
-                        <p>Here, order is maintained by the Church of Seiros, which hosts the prestigious Officer’s Academy within its headquarters. You are invited to teach one of its three mighty houses, each comprised of students brimming with personality and represented by a royal from one of three territories. As their professor, you must lead your students in their academic lives and in turn-based, tactical RPG battles wrought with strategic, new twists to overcome. Which house, and which path, will you choose? <span><a href="https://www.igdb.com/games/fire-emblem-three-houses">Read more...</a></span></p>
+                        <p><?php echo $g_summary?><span><a href="https://www.igdb.com/games/fire-emblem-three-houses">Read more...</a></span></p>
                     </div>
                 </div>
             </div>
@@ -104,7 +119,6 @@
                     <div class="rates">
                         <div class="row">
                             <!-- Mobile -->
-                            <!-- <div class="col-1"></div> -->
                             <div class="col-2 d-md-none mobile-rating" style="color: <?php echo $c1 ?>">
                                 <h2 id="r1head" class="rating-header"><i class="fa fa-book"></i><br><?php echo $r1?></h2>
                             </div>
@@ -125,15 +139,15 @@
                 </div>
                 <div id="deet" class="tab-pane fade">
                     <div class="quick-deets">
-                        <h5>Released: <span class="detail-card-info">July 25th, 2019</span></h5>
-                        <h5>Developer(s): <span class="detail-card-info">Intelligent Systems, Nintendo</span></h5>
-                        <h5>Platform(s): <span class="detail-card-info">Nintendo Switch</span></h5>
-                        <h5>Genre(s): <span class="detail-card-info">Adventure, RPG, Tactics, Turn-Based Strategy</span></h5>
+                        <h5>Released: <span class="detail-card-info"><?php echo $g_dor ?></span></h5>
+                        <h5>Developer(s): <span class="detail-card-info"><?php echo $g_dev ?></span></h5>
+                        <h5>Platform(s): <span class="detail-card-info"><?php echo $g_plat ?></span></h5>
+                        <h5>Genre(s): <span class="detail-card-info"><?php echo $g_genre ?></span></h5>
                     </div>
                 </div>
                 <div id="summ" class="tab-pane fade">
                     <div class="details-summary">
-                        <p>Here, order is maintained by the Church of Seiros, which hosts the prestigious Officer’s Academy within its headquarters. You are invited to teach one of its three mighty houses, each comprised of students brimming with personality and represented by a royal from one of three territories. As their professor, you must lead your students in their academic lives and in turn-based, tactical RPG battles wrought with strategic, new twists to overcome. Which house, and which path, will you choose? <span><a href="https://www.igdb.com/games/fire-emblem-three-houses">Read more...</a></span></p>
+                        <p><?php echo $g_summary?><span><a href="https://www.igdb.com/games/fire-emblem-three-houses">Read more...</a></span></p>
                     </div>
                 </div>
             </div>
@@ -177,7 +191,7 @@
                 <h2 id="r5head" class="rating-header"><i class="fa fa-money"></i> Worth It?</h2>
             </div>
         </div>
-        <p class="d-none d-md-block col-12" style="text-align:center; margin-top:10px; font-style:italic;">Scored by 2391 users</p>
+        <p class="d-none d-md-block col-12" style="text-align:center; margin-top:10px; font-style:italic;">Scored by <?php echo $r_usercount?> users</p>
         
     </div><br>
     <form style="text-align:center;">
@@ -187,51 +201,25 @@
     <h1>Comments</h1>
     <hr style="background:white;">
     <form class="form-group">
-        <textarea name="comment" class="form-control">Enter comment here...</textarea><br>
+        <textarea name="comment" class="form-control" placeholder="Enter comment here..."></textarea><br>
         <input class="btn btn-success" type="submit">
     </form>
     <br>
 
-    <!-- SAMPLE COMMENT -->
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-10">
-                    <h4 class="card-title">DemonSlayer6969 <span class="comment-date">(1/2/2020)</span></h4>
-                    <p class="card-text">Best Fire Emblem game I've ever played since Awakening!</p>
-                </div>
-                <div class="col-2"><br>
-                    <form style="text-align:center;">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fa fa-thumbs-up"></i>
-                            Like
-                        </button>
-                        <p class="comment-like-num"><b>10</b> likes</p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div><br>
-
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-10">
-                    <h4 class="card-title">YaBoi2004 <span class="comment-date">(1/19/2020)</span></h4>
-                    <p class="card-text">This story completely blows Fire Emblem Fates' out of the water!!</p>
-                </div>
-                <div class="col-2"><br>
-                    <form style="text-align:center;">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fa fa-thumbs-up"></i>
-                            Like
-                        </button>
-                        <p class="comment-like-num"><b>4</b> likes</p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php
+        $username = "BrianGH";
+        $postdate = "1/21/2020";
+        $text = "Hey! I am just testing the functionality of the comment system :)";
+        $likecount = 4;
+        include TEMPLATES_PATH . "/gamepage/comment.php" 
+    ?>
+    <?php
+        $username = "MZucc";
+        $postdate = "2/1/2020";
+        $text = "My favorite type of data is user data :p";
+        $likecount = 0;
+        include TEMPLATES_PATH . "/gamepage/comment.php" 
+    ?>
 
     <br>
     <?php 
@@ -268,8 +256,5 @@
         gauge4.setValueAnimated(r4,1.3);
         gauge5.setValueAnimated(r5,1.4);
     });
-
-    
-    
     
 </script>

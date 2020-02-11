@@ -23,11 +23,14 @@
 
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/game.php">Games</a>
+                <li>
+                    <form class="form-inline" action="search.php">
+                        <input class="form-control mr-sm-2" style="border-radius: 20px;" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success my-2 my-sm-0" style="border-radius: 20px;" type="submit">Search</button>
+                    </form>
                 </li>
             </ul>
-            <a class="btn btn-info" href="/user.php">
+            <a class="btn btn-info" style="margin-top: 10px; border-radius: 20px;" href="/user.php">
                 <i class="fa fa-user"></i> Login
             </a>
         </div>
