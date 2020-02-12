@@ -16,9 +16,8 @@ $likecount - number of likes the comment has
             <div class="col-2"><br>
                 <form style="text-align:center;">
                     <button class="btn btn-primary" type="submit">
-                        <i class="fa fa-thumbs-up"></i>
+                        <b><?php echo $likecount ?></b> <i class="fa fa-thumbs-up"></i>
                     </button>
-                    <p class="comment-like-num"><b><?php echo $likecount ?></b> like(s)</p>
                 </form>
             </div>
         </div>

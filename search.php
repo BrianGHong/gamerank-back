@@ -32,7 +32,8 @@
     <?php
     $g_title = "Fire Emblem: Three Houses";
     $g_pic = "https://images.igdb.com/igdb/image/upload/t_cover_big/co1n8t.jpg";
-    $r1 = 68; $r2 = 84; $r3 = 76; $r4 = 45; $r5 = 94;
+    $g_genre = "Adventure, RPG, Tactics, Turn-Based Strategy";
+    $r1 = 68; $r2 = 84; $r3 = 76; $r4 = 45; $r5 = 94; 
     include TEMPLATES_PATH . "/searchpage/gamecard.php"
     ?>
     <?php

@@ -1,6 +1,7 @@
 /* https://www.cssscript.com/animated-svg-gauge/ */
 
 .rating-header {
+    font-size: 25px;
     text-align:center;    
 } 
 
@@ -41,7 +42,7 @@
         padding: 1
     }
     .rating-header {
-        font-size: 25px;
+        font-size: 22px;
     }
 }
 /* // Large devices (desktops, 992px and up) */

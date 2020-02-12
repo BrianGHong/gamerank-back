@@ -47,7 +47,6 @@
 
 
 <link rel="stylesheet" href= "public/css/gamepage.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.1/magnific-popup.min.css" rel="stylesheet">
 
 <!-- Gauge -->
 <link rel="stylesheet" href= "public/css/gauge.css">
@@ -65,10 +64,7 @@
             <div class="col-xl-3 col-lg-4 col-4">
                 <!-- Thumbnail -->
                 <a href="<? echo $g_trailer ?>" class="trailer-link" target="_blank">
-                    <div class="trailer-img-wrap">
-                        <img class="trailer-img" src="<?php echo $g_thumbnail ?>" />
-                        <p class="watch-trailer"><i class="fa fa-play"></i><br>Watch Trailer!</p>
-                    </div>
+                    <img class="trailer-img" src="<?php echo $g_thumbnail ?>" />
                 </a>
             </div>
             <div class="col-xl-9 col-lg-8 col-8">
@@ -119,19 +115,19 @@
                     <div class="rates">
                         <div class="row">
                             <!-- Mobile -->
-                            <div class="col-2 d-md-none mobile-rating" style="color: <?php echo $c1 ?>">
+                            <div title="Story Rating" id="mobile-rate1" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating" style="color: <?php echo $c1 ?>">
                                 <h2 id="r1head" class="rating-header"><i class="fa fa-book"></i><br><?php echo $r1?></h2>
                             </div>
-                            <div class="col-2 d-md-none mobile-rating" style="color: <?php echo $c2 ?>">
+                            <div title="Gameplay Rating" id="mobile-rate2" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating" style="color: <?php echo $c2 ?>">
                                 <h2 id="r2head" class="rating-header"><i class="fa fa-gamepad"></i><br><?php echo $r2?></h2>
                             </div>
-                            <div class="col-2 d-md-none mobile-rating" style="color: <?php echo $c3 ?>">
+                            <div title="Art/Music Rating" id="mobile-rate3" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating" style="color: <?php echo $c3 ?>">
                                 <h2 id="r3head" class="rating-header"><i class="fa fa-paint-brush"></i><br><?php echo $r3?></h2>
                             </div>
-                            <div class="col-2 d-md-none mobile-rating" style="color: <?php echo $c4 ?>">
+                            <div title="Difficulty Rating" id="mobile-rate4" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating" style="color: <?php echo $c4 ?>">
                                 <h2 id="r4head" class="rating-header"><i class="fa fa-bolt"></i><br><?php echo $r4?></h2>
                             </div>
-                            <div class="col-2 d-md-none mobile-rating" style="color: <?php echo $c5 ?>">
+                            <div title="Value Rating" id="mobile-rate5" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating" style="color: <?php echo $c5 ?>">
                                 <h2 id="r5head" class="rating-header"><i class="fa fa-money"></i><br><?php echo $r5?></h2>
                             </div>
                         </div>
@@ -191,7 +187,7 @@
                 <h2 id="r5head" class="rating-header"><i class="fa fa-money"></i> Worth It?</h2>
             </div>
         </div>
-        <p class="d-none d-md-block col-12" style="text-align:center; margin-top:10px; font-style:italic;">Scored by <?php echo $r_usercount?> users</p>
+        <p class="col-12" style="text-align:center; margin-top:10px; font-style:italic;">Scored by <?php echo $r_usercount?> users</p>
         
     </div><br>
     <form style="text-align:center;">
@@ -255,6 +251,13 @@
         gauge3.setValueAnimated(r3,1.2);
         gauge4.setValueAnimated(r4,1.3);
         gauge5.setValueAnimated(r5,1.4);
+
+        // Tooltip functionality
+        $('#mobile-rate1').tooltip({ boundary: 'window' })
+        $('#mobile-rate2').tooltip({ boundary: 'window' })
+        $('#mobile-rate3').tooltip({ boundary: 'window' })
+        $('#mobile-rate4').tooltip({ boundary: 'window' })
+        $('#mobile-rate5').tooltip({ boundary: 'window' })
     });
     
 </script>

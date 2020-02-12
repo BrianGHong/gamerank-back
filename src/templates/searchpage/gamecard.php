@@ -2,6 +2,7 @@
 
 $g_title - user's name... not much else to say
 $g_pic - date the comment was posted
+$g_genre - game's genre
 $r1 - story rating
 $r2 - gameplay rating
 $r3 - artmusic rating
@@ -41,6 +42,11 @@ $r5 - value rating
     margin-left: 10px;
 }
 
+.genres {
+    font-size: 20px; 
+    margin-left: 10px;
+}
+
 .gamecard p {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
@@ -56,6 +62,10 @@ $r5 - value rating
     }
     .ri {
         margin: 0 4px;
+    }
+    .genres {
+        font-size: 16px; 
+        margin-left: 1px;
     }
 }
 
@@ -74,6 +84,9 @@ $r5 - value rating
                 <i class="ri fa fa-paint-brush" style="color: <?php echo $c3 ?>"> <p><?php echo $r3; ?></p></i>
                 <i class="ri fa fa-bolt" style="color: <?php echo $c4 ?>"> <p><?php echo $r4; ?></p></i>
                 <i class="ri fa fa-money" style="color: <?php echo $c5 ?>"> <p><?php echo $r5; ?></p></i>
+            </div>
+            <div class="genres row">
+                <?php echo $g_genre ?>
             </div>
         </div>
     </div>

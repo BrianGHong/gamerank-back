@@ -8,6 +8,11 @@
     $c3 = "#ae00ff";
     $c4 = "#db2100";
     $c5 = "#11c24c";
+
+    # Medal Colors
+    $gold = "#cfcb00";
+    $silver = "#adadad";
+    $bronze = "#8a7849";
 ?>
 <link rel="stylesheet" href= "public/css/index.css">
 
@@ -24,29 +29,67 @@
     </div>
 </div>
 <div class="container">
-    <!-- <h1>Dashboard</h1> -->
+    <h1>Leaderboards</h1>
+    <hr>
     <div class="row" style="text-align:center;">
-        <div class="col-4 container">
-            <h2 id="r1head" class="rating-header"><i class="fa fa-book" style="color: <?php echo $c1?>"></i> Best Story</h2>
-            <img src="https://images-na.ssl-images-amazon.com/images/I/61i4yn1Jc7L._SY355_.png" width="180px" style="margin-bottom: 10px;">
+        <div class="col-6 container">
+            <?php 
+            $category = "Best Story";
+            $cat_color = $c1;
+            $cat_icon = "fa fa-book";
+            $first = "Shadow of the Colossus";
+            $sec = "The Legend of Zelda: Wind Waker";
+            $thr = "God of War";
+            include TEMPLATES_PATH . "/homepage/ranking.php"
+            ?>
         </div>
-        <div class="col-4 container">
-            <h2 id="r5head" class="rating-header"><i class="fa fa-money" style="color: <?php echo $c5?>"></i> Most Worth</h2>
-            <img src="https://images-na.ssl-images-amazon.com/images/I/61i4yn1Jc7L._SY355_.png" width="180px" style="margin-bottom: 10px;">
-        </div>
-        <div class="col-4 container">
-            <h2 id="r4head" class="rating-header" style="font-size: 30px;"><i class="fa fa-bolt" style="color: <?php echo $c4?>"></i> Most Difficult</h2>
-            <img src="https://images-na.ssl-images-amazon.com/images/I/61i4yn1Jc7L._SY355_.png" width="180px" style="margin-bottom: 10px;">
+        <div class="col-6 container">
+            <?php 
+                $category = "Best Gameplay";
+                $cat_color = $c2;
+                $cat_icon = "fa fa-gamepad";
+                $first = "The Legend of Zelda: Breath of the Wild";
+                $sec = "Bloodborne";
+                $thr = "Dark Souls";
+                include TEMPLATES_PATH . "/homepage/ranking.php"
+            ?>
         </div>
     </div>
     <div class="row" style="text-align:center;">
         <div class="col-6 container">
-            <h2 id="r2head" class="rating-header"><i class="fa fa-gamepad" style="color: <?php echo $c2?>"></i> Best Gameplay</h2>
-            <img src="https://images-na.ssl-images-amazon.com/images/I/61i4yn1Jc7L._SY355_.png" width="180px" style="margin-bottom: 10px;">
+            <?php 
+                $category = "Best Art/Music";
+                $cat_color = $c3;
+                $cat_icon = "fa fa-paint-brush";
+                $first = "Persona 5";
+                $sec = "Sekiro";
+                $thr = "Okami";
+                include TEMPLATES_PATH . "/homepage/ranking.php"
+            ?>
         </div>
         <div class="col-6 container">
-            <h2 id="r3head" class="rating-header"><i class="fa fa-paint-brush" style="color: <?php echo $c3?>"></i> Best Art/Music</h2>
-            <img src="https://images-na.ssl-images-amazon.com/images/I/61i4yn1Jc7L._SY355_.png" width="180px" style="margin-bottom: 10px;">
+            <?php 
+                $category = "Most Difficult";
+                $cat_color = $c4;
+                $cat_icon = "fa fa-bolt";
+                $first = "Dark Souls";
+                $sec = "Bloodborne";
+                $thr = "Sekiro";
+                include TEMPLATES_PATH . "/homepage/ranking.php"
+            ?>
+        </div>
+    </div>
+    <div class="row" style="text-align:center;">
+        <div class="col-12">
+            <?php 
+                $category = "Best Value";
+                $cat_color = $c5;
+                $cat_icon = "fa fa-money";
+                $first = "Skyrim";
+                $sec = "Subnautica";
+                $thr = "Super Smash Bros. Ultimate";
+                include TEMPLATES_PATH . "/homepage/ranking.php"
+            ?>
         </div>
     </div>
     <?php

@@ -1,3 +1,7 @@
 .btn-game {
     border-radius: 30px;
 }
+
+@media (min-width: 800px) {
+    .jumbotron { height: 400px; }
+}
