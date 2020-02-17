@@ -12,8 +12,8 @@
 <div><br>
 
     <?php
-        //include TEMPLATES_PATH . "/user/login.php";
-        include TEMPLATES_PATH . "/user/userpage.php";
+        include TEMPLATES_PATH . "/user/login.php";
+        //include TEMPLATES_PATH . "/user/userpage.php";
 
         require_once(TEMPLATES_PATH . "/footer.php");
     ?>

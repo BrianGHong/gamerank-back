@@ -1,4 +1,6 @@
-# Gamerank
+# GameGauge
+
+A video game scoring system, a project to apply concepts learned regarding DB design and application.
 
 ## Development
 
@@ -15,3 +17,10 @@ https://code.tutsplus.com/tutorials/organize-your-next-php-project-the-right-way
 ### GCloud deploy setting configs
 
 https://stackoverflow.com/questions/52930662/google-app-engine-gae-error-chown-cannot-access-app-public-no-such-file
+
+
+## Authors
+
+Brian Hong, Carl Zhang, Peter Felland, Hua Uehara
+CS 4750 - Spring 2020
+
