@@ -39,7 +39,7 @@
     <?php
     $g_title = "Sekiro: Shadows Die Twice";
     $g_pic = "https://images.igdb.com/igdb/image/upload/t_cover_big/co1j0g.jpg";
-    $r1 = 68; $r2 = 84; $r3 = 76; $r4 = 45; $r5 = 94;
+    $r1 = 28; $r2 = 84; $r3 = 76; $r4 = 45; $r5 = 94;
     include TEMPLATES_PATH . "/searchpage/gamecard.php"
     ?>
     <?php

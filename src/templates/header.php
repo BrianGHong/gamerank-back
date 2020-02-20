@@ -37,13 +37,13 @@
                         <div class="input-group" role="group">
                             <input class="form-control" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;" type="search" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
-                                <button class="btn btn-danger" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-outline-light" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" type="submit"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </form>
                 </li>
             </ul>
-            <a class="nav-item btn btn-outline-light" style="margin-top: 0; border-radius: 20px;" href="/user.php">
+            <a class="nav-item btn btn-outline-light" style="margin-top: 2px; border-radius: 20px;" href="/user.php">
                 <i class="fa fa-user"></i> Login
             </a>
         </div>

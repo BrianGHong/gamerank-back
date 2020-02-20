@@ -25,7 +25,7 @@
 ">
     <div class="container">
         <h1 style="font-weight: bold; text-shadow: 4px 4px black;">So Many Games, So Little Time</h1>
-        <a class="btn btn-primary btn-game" href="game.php">Random</a>
+        <a class="btn btn-success btn-game" href="game.php">Take me to a game</a>
     </div>
 </div>
 <div class="container">
