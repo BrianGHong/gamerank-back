@@ -4,11 +4,17 @@ A video game scoring system, a project to apply concepts learned regarding DB de
 
 ## Development
 
-Run locally with `php -S localhost:8000` in the root dir
+Run locally with `./run.sh` in the root dir
+
+(Make sure you chmod dat b4hand)
 
 ## Deployment
 
 Using gcloud: `gcloud app deploy app.yaml` in the root dir
+
+## Resources
+
+Resources used/referenced during development.
 
 ### PHP Formatting Guide
 
@@ -22,5 +28,6 @@ https://stackoverflow.com/questions/52930662/google-app-engine-gae-error-chown-c
 ## Authors
 
 Brian Hong, Carl Zhang, Peter Felland, Hua Uehara
+
 CS 4750 - Spring 2020
 
