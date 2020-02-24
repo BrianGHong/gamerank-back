@@ -60,7 +60,6 @@
     $r1 = 68; $r2 = 84; $r3 = 76; $r4 = 45; $r5 = 94;
     include TEMPLATES_PATH . "/searchpage/gamecard.php"
     ?>
-    
 
     <?php
         require_once(TEMPLATES_PATH . "/footer.php");

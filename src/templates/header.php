@@ -14,12 +14,17 @@
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
     crossorigin="anonymous"></script>
 
+    <style>
+    .navbar {
+        background: #f37e00;
+    }
+    </style>
 
     <title>GameGauge</title>
     <link rel="shortcut icon" type="image/ico" href="public/icons/gg-logo.ico">
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background:#ff4900;">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container inline-block">
         <a class="navbar-brand" href="/">
             <h3 style="margin: 0;">
