@@ -28,6 +28,10 @@
         </div>
     </form><br>
 
+    <!-- Gauges -->
+    <link rel="stylesheet" href= "public/css/gauge.css">
+    <script src="public/js/gauge.min.js"></script>
+
     <!-- Search Results -->
     <?php
     $g_title = "Fire Emblem: Three Houses";
