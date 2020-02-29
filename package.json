@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "ejs-lint": "^1.0.1",
+    "express": "^4.17.1",
+    "node": "^13.8.0",
+    "nodemon": "^2.0.2"
+  }
+}
