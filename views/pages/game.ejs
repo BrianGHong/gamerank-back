@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/header.ejs') %>
+
+        <link rel="stylesheet" href="./css/gamepage.css">
+
+        <!-- Gauge -->
+        <link rel="stylesheet" href="./css/gauge.css">
+        <script src="./js/gauge.min.js"></script>
+
+        <!-- COLORS AND RATINGS -->
+        <div style="display:none;">
+            <var id="c1">f7bd00</var>
+            <var id="c2">0099f7</var>
+            <var id="c3">ae00ff</var>
+            <var id="c4">db2100</var>
+            <var id="c5">11c24c</var>
+        
+            <var id="r1"><%- gamedata.r1 %></var>
+            <var id="r2"><%- gamedata.r2 %></var>
+            <var id="r3"><%- gamedata.r3 %></var>
+            <var id="r4"><%- gamedata.r4 %></var>
+            <var id="r5"><%- gamedata.r5 %></var>
+        </div>
+    </head>
+    <body>
+        <%- include('../partials/navbar.ejs') %>
+
+        <div class="">
+            <div style="
+                background-image: url(<%- gamedata.bg %>);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                ">
+                <div class="container detail-card"><br>
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-4">
+                            <!-- Thumbnail -->
+                            <a href="<%- gamedata.trailer %>" class="trailer-link" target="_blank">
+                                <img class="trailer-img" src="<%- gamedata.thumb %>" />
+                            </a>
+                        </div>
+                        <div class="col-xl-9 col-lg-8 col-8">
+                            <h1 class="game-title"><%- gamedata.title %></h1>
+                            
+                            <!-- Favorite -->
+                            <form>
+                                <button class="btn btn-danger" style="border-radius: 20px;">
+                                    <i class="fa fa-heart"></i>
+                                        Favorite
+                                </button>
+                                <span style="margin-left: 10px;"><%- gamedata.favs %> favorite(s)!</span>
+                            </form>
+            
+                            <!-- Details -->
+                            <!-- Desktop -->
+                            <div class="d-none d-md-block">
+                                <div class="quick-deets">
+                                    <h5>Released: <span class="detail-card-info"><%- gamedata.dor %></span></h5>
+                                    <h5>Developer(s): <span class="detail-card-info"><%- gamedata.dev %></span></h5>
+                                    <h5>Platform(s): <span class="detail-card-info"><%- gamedata.plat %></span></h5>
+                                    <h5>Genre(s): <span class="detail-card-info"><%- gamedata.genre %></span></h5>
+                                </div>
+            
+                                <!-- Summary -->
+                                <div class="details-summary">
+                                    <p><%- gamedata.summary %><span><a href="https://www.igdb.com/games/fire-emblem-three-houses"> Read more...</a></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Details -->
+                    <!-- Mobile -->
+                    <div class="container row d-block d-md-none"><br>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#rates">Ratings</a>
+                            </li>    
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#deet">Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#summ">Summary</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="rates" class="tab-pane active">
+                                <div class="rates">
+                                    <div class="row">
+                                        <!-- Mobile -->
+                                        <div title="Story Rating" id="mobile-rate1" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating r1">
+                                            <h2 id="r1head" class="rating-header"><i class="fa fa-book"></i><br><%- gamedata.r1 %></h2>
+                                        </div>
+                                        <div title="Gameplay Rating" id="mobile-rate2" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating r2">
+                                            <h2 id="r2head" class="rating-header"><i class="fa fa-gamepad"></i><br><%- gamedata.r2 %></h2>
+                                        </div>
+                                        <div title="Art/Music Rating" id="mobile-rate3" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating r3">
+                                            <h2 id="r3head" class="rating-header"><i class="fa fa-paint-brush"></i><br><%- gamedata.r3 %></h2>
+                                        </div>
+                                        <div title="Difficulty Rating" id="mobile-rate4" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating r4">
+                                            <h2 id="r4head" class="rating-header"><i class="fa fa-bolt"></i><br><%- gamedata.r4 %></h2>
+                                        </div>
+                                        <div title="Value Rating" id="mobile-rate5" data-toggle="tooltip" data-placement="top" class="col-2 d-md-none mobile-rating r5">
+                                            <h2 id="r5head" class="rating-header"><i class="fa fa-money"></i><br><%- gamedata.r5 %></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="deet" class="tab-pane fade">
+                                <div class="quick-deets">
+                                    <h5>Released: <span class="detail-card-info"><%- gamedata.dor %></span></h5>
+                                    <h5>Developer(s): <span class="detail-card-info"><%- gamedata.dev %></span></h5>
+                                    <h5>Platform(s): <span class="detail-card-info"><%- gamedata.plat %></span></h5>
+                                    <h5>Genre(s): <span class="detail-card-info"><%- gamedata.genre %></span></h5>
+                                </div>
+                            </div>
+                            <div id="summ" class="tab-pane fade">
+                                <div class="details-summary">
+                                    <p><%- gamedata.summary %><span><a href="https://www.igdb.com/games/fire-emblem-three-houses"> Read more...</a></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-2 r1">
+                        <!-- Desktop -->
+                        <div id="gauge1" class="gauge-container three d-none d-md-block">
+                            <h2 id="r1head" class="rating-header"><i class="fa fa-book"></i> Story</h2>
+                        </div>
+                    </div>
+                    <div class="col-2 r2">
+                        <!-- Desktop -->
+                        <div id="gauge2" class="gauge-container three d-none d-md-block">
+                            <h2 id="r2head" class="rating-header"><i class="fa fa-gamepad"></i> Gameplay</h2>
+                        </div>
+                    </div>
+                    <div class="col-2 r3">
+                        <!-- Desktop -->
+                        <div id="gauge3" class="gauge-container three d-none d-md-block">
+                            <h2 id="r3head" class="rating-header"><i class="fa fa-paint-brush"></i> Art/Music</h2>
+                        </div>
+                    </div>
+                    <div class="col-2 r4">
+                        <!-- Desktop -->
+                        <div id="gauge4" class="gauge-container three d-none d-md-block">
+                            <h2 id="r4head" class="rating-header"><i class="fa fa-bolt"></i> Difficulty</h2>
+                        </div>
+                    </div>
+                    <div class="col-2 r5">
+                        <!-- Desktop -->
+                        <div id="gauge5" class="gauge-container three d-none d-md-block">
+                            <h2 id="r5head" class="rating-header"><i class="fa fa-money"></i> Worth It?</h2>
+                        </div>
+                    </div>
+                    <p class="col-12" style="text-align:center; margin-top:10px; font-style:italic;"></p>
+                </div>
+
+                <div style="text-align:center;">
+                    <input class="btn btn-success rating-button btn-lg" type="submit" value="Leave a Rating!"/><br>
+                    <p style="color: gray; font-style:italic;"><%- gamedata.rC %> users</p>
+                </div><br>
+            
+                <h1>Comments</h1>
+                <hr style="background:white;">
+                <form class="form-group">
+                    <textarea name="comment" class="form-control" placeholder="Enter comment here..."></textarea><br>
+                    <input class="btn btn-success" type="submit">
+                </form>
+                <br>
+
+                <!-- COMMENTS WILL RENDER HERE -->
+
+            </div>
+            
+            <script>
+                $(document).ready(function() {
+                    const c1 = document.getElementById("c1").innerHTML;
+                    const c2 = document.getElementById("c2").innerHTML;
+                    const c3 = document.getElementById("c3").innerHTML;
+                    const c4 = document.getElementById("c4").innerHTML;
+                    const c5 = document.getElementById("c5").innerHTML;
+            
+                    let r1 = parseInt(document.getElementById("r1").innerHTML);
+                    let r2 = parseInt(document.getElementById("r2").innerHTML);
+                    let r3 = parseInt(document.getElementById("r3").innerHTML);
+                    let r4 = parseInt(document.getElementById("r4").innerHTML);
+                    let r5 = parseInt(document.getElementById("r5").innerHTML);
+            
+                    // Set colors of each gauge
+                    let gauge1 = Gauge(document.getElementById("gauge1"), {color: () => {return c1}});
+                    let gauge2 = Gauge(document.getElementById("gauge2"), {color: () => {return c2}});
+                    let gauge3 = Gauge(document.getElementById("gauge3"), {color: () => {return c3}});
+                    let gauge4 = Gauge(document.getElementById("gauge4"), {color: () => {return c4}});
+                    let gauge5 = Gauge(document.getElementById("gauge5"), {color: () => {return c5}});
+            
+                    // Gauge animations
+                    gauge1.setValueAnimated(r1,1);
+                    gauge2.setValueAnimated(r2,1.1);
+                    gauge3.setValueAnimated(r3,1.2);
+                    gauge4.setValueAnimated(r4,1.3);
+                    gauge5.setValueAnimated(r5,1.4);
+            
+                    // Tooltip functionality
+                    $('#mobile-rate1').tooltip({ boundary: 'window' })
+                    $('#mobile-rate2').tooltip({ boundary: 'window' })
+                    $('#mobile-rate3').tooltip({ boundary: 'window' })
+                    $('#mobile-rate4').tooltip({ boundary: 'window' })
+                    $('#mobile-rate5').tooltip({ boundary: 'window' })
+                });
+                
+            </script>            
+
+            <%- gameid %>
+
+            <%- include('../partials/footer.ejs') %>
+        </div>
+    </body>
+</html>
