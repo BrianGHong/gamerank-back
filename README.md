@@ -4,9 +4,8 @@ A video game scoring system, a project to apply concepts learned regarding DB de
 
 ## Development
 
-Run locally with `./run.sh` in the root dir
-
-(Make sure you chmod dat b4hand)
+Run command `npm install` if freshly cloned.
+Run `nodemon app.js` to run server on `localhost:3000`
 
 ## Deployment
 
@@ -15,14 +14,6 @@ Using gcloud: `gcloud app deploy app.yaml` in the root dir
 ## Resources
 
 Resources used/referenced during development.
-
-### PHP Formatting Guide
-
-https://code.tutsplus.com/tutorials/organize-your-next-php-project-the-right-way--net-5873
-
-### GCloud deploy setting configs
-
-https://stackoverflow.com/questions/52930662/google-app-engine-gae-error-chown-cannot-access-app-public-no-such-file
 
 
 ## Authors
