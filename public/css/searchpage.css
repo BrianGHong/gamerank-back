@@ -1,0 +1,62 @@
+.gamecard {
+    color: black;
+    text-decoration: none;
+    transition: transform .2s;
+}
+
+.gamecard:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    -ms-transform: scale(1.02); /* IE 9 */
+    -webkit-transform: scale(1.02); /* Safari 3-8 */
+    transform: scale(1.02);
+}
+
+.game-img {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    margin: 0;
+}
+
+.ri {
+    padding-top: 5px;
+    font-size: 100%;
+}
+
+.rates {
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+.genres {
+    font-size: 20px; 
+    margin-left: 10px;
+}
+
+.gamecard p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.progress-bar {
+    font-size: 100%;
+}
+
+@media (max-width: 500px) {
+    h2 {
+        font-size: 22px;
+    }
+    .rates {
+        font-size: 20px;
+        margin-left: 1px;
+    }
+    .ri {
+        margin: 0 4px;
+    }
+    .genres {
+        font-size: 16px; 
+        margin-left: 1px;
+    }
+}
