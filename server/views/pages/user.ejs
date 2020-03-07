@@ -7,58 +7,7 @@
         <%- include('../partials/navbar.ejs') %>
 
         <style>
-            .card {
-                max-width: 200px;
-                transition: transform .2s;
-            }
-            .card:hover {
-                cursor: pointer;
-                -ms-transform: scale(1.03); /* IE 9 */
-                -webkit-transform: scale(1.03); /* Safari 3-8 */
-                transform: scale(1.03);
-            }
-            .game-img {
-                width: 100%;
-                height: 100%;
-                border-radius: 5px;
-            }
             
-            .card-deck {
-                display: flex;
-                flex-flow: row wrap;
-            }
-            
-            @media (min-width: 0px) {
-                .card {
-                    max-width: 130px;
-                }
-                .gamecard {
-                    padding: 0 2px;
-                }
-            }
-            @media (min-width: 400px) {
-                .card {
-                    max-width: 110px;
-                }
-            }
-            @media (min-width: 700px) {
-                .card {
-                    max-width: 130px;
-                }
-            }
-            @media (min-width: 990px) {
-                .card {
-                    max-width: 150px;
-                }
-                .gamecard {
-                    padding: 0 5px;
-                }
-            }
-            @media (min-width: 1200px) {
-                .card {
-                    max-width: 190px;
-                }
-            }
         </style>
         
         <div class="container">
