@@ -20,12 +20,6 @@
     padding-top: 30%;
 }
 
-.r1 { color: #f7bd00; }
-.r2 { color: #0099f7; }
-.r3 { color: #ae00ff; }
-.r4 { color: #db2100; }
-.r5 { color: #11c24c; }
-
 .trailer-img-wrap:hover .watch-trailer {
     visibility: visible;
     opacity: 1;
@@ -71,7 +65,6 @@
     font-weight: bold;
 }
 
-
 /* Comment Styling */
 .comment-date {
     color: gray;
@@ -95,11 +88,25 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.gauge-container {
+    text-align: center;
+}
+
+.gp { margin: 5px 1px; }
+
+
+@media (min-width: 200px) {
+    .gauge-f1 { font-weight: bold; font-size: 15px; }
+    .gauge-f2 { font-size: 4px; }
+}
+
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
+@media (min-width: 500px) {
     .game-title {
         font-size: 40px;
     }
+    .gauge-f1 { font-size: 20px; }
+    .gauge-f2 { font-size: 9px; }
 }
 
 /* // Medium devices (tablets, 768px and up) */
@@ -107,6 +114,7 @@
     .game-title {
         font-size: 60px;
     }
+    .gp { margin: 15px 5px; }
 }
 
 /* // Large devices (desktops, 992px and up) */
@@ -114,6 +122,8 @@
     .trailer-img {
         width: 100%;
     }
+    .gauge-f1 { font-size: 40px; }
+    .gauge-f2 { font-size: 20px; }
 }
 
 /* // Extra large devices (large desktops, 1200px and up) */

@@ -44,6 +44,15 @@
     font-size: 100%;
 }
 
+.gauge-main {
+    font-size: 12px;
+    text-align: center;
+}
+
+.gauge-icon {
+    font-size: 12px;
+}
+
 @media (max-width: 500px) {
     h2 {
         font-size: 22px;
@@ -58,5 +67,26 @@
     .genres {
         font-size: 16px; 
         margin-left: 1px;
+    }
+
+    .gauge-main {
+        font-size: 3px;
+        text-align: center;
+    }
+    
+    .gauge-icon {
+        font-size: 12px;
+    }
+    
+}
+
+@media (max-width: 730px) {
+    .gauge-main {
+        font-size: 10px;
+        text-align: center;
+    }
+    
+    .gauge-icon {
+        font-size: 10px;
     }
 }
