@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export class Navbar extends React.Component {
     constructor(props) {
@@ -10,11 +11,11 @@ export class Navbar extends React.Component {
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark">
                     <div className="container-fluid inline-block">
-                        <a className="navbar-brand" href="/">
+                        <Link className="navbar-brand" to="/">
                             <h3 style={{margin: 0}}>
                                 <img className="d-inline-block align-top" src="/img/gg-logo-long.png" height="40" style={{padding: 0, margin: 0}}/>
                             </h3>
-                        </a>
+                        </Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
@@ -31,9 +32,9 @@ export class Navbar extends React.Component {
                                     </form>
                                 </li>
                             </ul>
-                            <a className="gg-item nav-item btn btn-outline-light" style={{marginTop: "2px", borderRadius: "20px"}} href="/user">
+                            <Link className="gg-item nav-item btn btn-outline-light" style={{marginTop: "2px", borderRadius: "20px"}} to="/user">
                                 <i className="fa fa-user"></i> Login
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </nav>

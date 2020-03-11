@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {Provider} from 'react-redux';
-import {Route, Switch, Router} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 // Partials
 import {Navbar} from './components/Partials/Navbar';
@@ -20,14 +19,29 @@ class App extends React.Component {
         return (
             <div>
                 <Navbar />
-                {/* <Home /> */}
-                {/* <Search /> */}
-                {/* <User/> */}
-                <Game />
+                
+                <Switch>
+                    <Route path="/game">
+                        <Game />
+                    </Route>
+                    <Route path="/search">
+                        <Search />
+                    </Route>
+                    <Route path="/user">
+                        <User />
+                    </Route>
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                </Switch>
                 <Footer />
             </div>
         );
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>    
+    , document.getElementById('root'));

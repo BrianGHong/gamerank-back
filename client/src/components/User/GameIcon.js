@@ -8,12 +8,14 @@ export class GameIcon extends React.Component {
 
     render() {
         return (
-            <div className="gamecard col-auto mb-4">
-                <a className="card" href="game" style={{margin: 0}}>
-                    <div title={this.props.title} id="g-title" data-toggle="tooltip" data-placement="top">
-                        <img className="game-img" src={this.props.url}/>
-                    </div>
-                </a>
+            <div id="u">
+                <div className="gamecard user-page col-auto mb-4">
+                    <a className="card user-page" href="game" style={{margin: 0}}>
+                        <div title={this.props.title} id="g-title" data-toggle="tooltip" data-placement="top">
+                            <img className="game-img user-page" src={this.props.url}/>
+                        </div>
+                    </a>
+                </div>
             </div>
         );
     }

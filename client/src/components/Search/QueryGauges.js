@@ -1,16 +1,15 @@
 import React from 'react';
-
-import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
+import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
 
-export class GG extends React.Component {
+export class Gauge extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
         return (
-            <div style={{color: this.props.color}}>
+            <div style={{color: this.props.color, margin: "0 5px"}}>
                 <CircularProgressbarWithChildren
                     value={this.props.rating}
                     circleRatio={0.75}
@@ -19,10 +18,12 @@ export class GG extends React.Component {
                         pathColor: this.props.color,
                         trailColor: "#eee",
                     })}
-                    >
-                    <h1 className="gauge-f1">{this.props.rating}%</h1>
-                    <h5 id="r1head" className="gauge-f2"><i className={this.props.icon}></i> {this.props.cat}</h5>
+                >
+                    <i className={this.props.icon + " gauge-icon"}></i>
+                    <div className="gauge-main d-md-block d-none"> {this.props.rating}%</div>
+                    
                 </CircularProgressbarWithChildren>
+                <span className="d-md-none d-block gauge-main">{Math.round(this.props.rating * 10) / 10}%</span>
             </div>
         );
     }

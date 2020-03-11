@@ -27,7 +27,13 @@ export class Search extends React.Component {
                     </div>
                 </form><br/>
 
-                <GameCard />
+                <GameCard 
+                    r1={20.01}
+                    r2={64.01}
+                    r3={53.01}
+                    r4={90.01}
+                    r5={76.01}
+                />
                 <GameCard />
             </div>
         );

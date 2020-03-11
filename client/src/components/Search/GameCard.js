@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import {Gauge} from './QueryGauges';
 
 export class GameCard extends React.Component {
     constructor(props) {
@@ -7,9 +9,17 @@ export class GameCard extends React.Component {
     }
 
     render() {
+        const colors = {
+            c1: "#f7bd00",
+            c2: "#0099f7",
+            c3: "#ae00ff",
+            c4: "#db2100",
+            c5: "#11c24c",
+        }
+
         return (
             <div>
-                <a className="card gamecard" href="game">
+                <Link className="card gamecard" to="/game">
                     <div className="row">
                         <div className="col-lg-2 col-md-3 col-4">
                             <img className="game-img" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1uii.jpg" />
@@ -17,22 +27,40 @@ export class GameCard extends React.Component {
                         <div className="col-lg-10 col-md-9 col-8" style={{marginTop: "10px"}}>
                             <h2 style={{wordWrap: "break-word"}}>The Legend of Zelda</h2>
                             <div className="rates row">
-                                <div className="col-sm-1 col-2 ri" title="Story Rating">
-                                    <i style={{color: "#f7bd00"}} className="fa fa-book"> <p id="r1">12</p></i>
+                                <div className="col-lg-1 col-2">
+                                    <Gauge
+                                        color={colors.c1}
+                                        icon="fa fa-book"
+                                        rating={this.props.r1}
+                                    />
                                 </div>
-                                <div className="col-sm-1 col-2 ri" title="Gameplay Rating">
-                                    <i style={{color: "#0099f7"}} className="fa fa-gamepad"> <p id="r2">54</p></i>
+                                <div className="col-lg-1 col-2">
+                                    <Gauge
+                                        color={colors.c2}
+                                        icon="fa fa-gamepad"
+                                        rating={this.props.r2}
+                                    />
                                 </div>
-                                <div className="col-sm-1 col-2 ri" title="Art/Music Rating">
-                                    <i style={{color: "#ae00ff"}} className="fa fa-paint-brush"> <p id="r3">23</p></i>
+                                <div className="col-lg-1 col-2">
+                                    <Gauge
+                                        color={colors.c3}
+                                        icon="fa fa-paint-brush"
+                                        rating={this.props.r3}
+                                    />
                                 </div>
-                                <div className="col-sm-1 col-2 ri" title="Difficulty Rating">
-                                    <i style={{color: "#db2100"}} className="fa fa-bolt"> <p id="r4">54</p></i>
+                                <div className="col-lg-1 col-2">
+                                    <Gauge
+                                        color={colors.c4}
+                                        icon="fa fa-bolt"
+                                        rating={this.props.r4}
+                                    />
                                 </div>
-                                <div className="col-sm-1 col-2 ri" title="Value Rating">
-                                    <i style={{color: "#11c24c"}} className="fa fa-money"> <p id="r5">53</p></i>
-                                </div>
-                                <div className="col-sm-7">
+                                <div className="col-lg-1 col-2">
+                                    <Gauge
+                                        color={colors.c5}
+                                        icon="fa fa-money"
+                                        rating={this.props.r5}
+                                    />
                                 </div>
                             </div>
                             <div className="genres row">
@@ -40,7 +68,7 @@ export class GameCard extends React.Component {
                             </div>
                         </div>
                     </div>
-                </a><br />
+                </Link><br />
             </div>
         );
     }
