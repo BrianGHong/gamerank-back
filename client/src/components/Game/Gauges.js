@@ -1,7 +1,11 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
+
+import AnimatedProgressProvider from "./Anims/AnimatedProgressProvider";
+
 
 class GG extends React.Component {
     constructor(props) {
@@ -11,18 +15,27 @@ class GG extends React.Component {
     render() {
         return (
             <div style={{color: this.props.color}}>
-                <CircularProgressbarWithChildren
-                    value={this.props.rating}
-                    circleRatio={0.75}
-                    styles={buildStyles({
-                        rotation: 1 / 2 + 1 / 8,
-                        pathColor: this.props.color,
-                        trailColor: "#eee",
-                    })}
-                    >
-                    <h1 className="gauge-f1">{this.props.rating}%</h1>
-                    <h5 id="r1head" className="gauge-f2"><i className={this.props.icon}></i> {this.props.cat}</h5>
-                </CircularProgressbarWithChildren>
+                <AnimatedProgressProvider
+                    valueStart={0}
+                    valueEnd={this.props.rating}
+                >
+                    {percentage => (
+                        <div>
+                            <CircularProgressbarWithChildren
+                                value={percentage}
+                                circleRatio={0.75}
+                                styles={buildStyles({
+                                    rotation: 1 / 2 + 1 / 8,
+                                    pathColor: this.props.color,
+                                    trailColor: "#eee",
+                                })}
+                                >
+                                <h1 className="gauge-f1">{percentage}%</h1>
+                                <h5 id="r1head" className="gauge-f2"><i className={this.props.icon}></i> <span className="d-lg-inline d-none">{this.props.cat}</span></h5>
+                            </CircularProgressbarWithChildren>
+                        </div>
+                    )}
+                </AnimatedProgressProvider>
             </div>
         );
     }
@@ -45,7 +58,7 @@ export class Gauges extends React.Component {
         return (
             <div className="row">
                 <div className="col-1"></div>
-                <div className="col-2 gp">
+                <div data-tip="Story Rating" className="col-2 gp">
                     <GG 
                         cat="Story"
                         icon="fa fa-book"
@@ -53,7 +66,7 @@ export class Gauges extends React.Component {
                         color={colors.c1}
                     />
                 </div>
-                <div className="col-2 gp">
+                <div data-tip="Gameplay Rating" className="col-2 gp">
                     <GG 
                         cat="Gameplay"
                         icon="fa fa-gamepad"
@@ -61,7 +74,7 @@ export class Gauges extends React.Component {
                         color={colors.c2}
                     />
                 </div>
-                <div className="col-2 gp">
+                <div data-tip="Art/Music Rating" className="col-2 gp">
                     <GG 
                         cat="Art/Music"
                         icon="fa fa-paint-brush"
@@ -69,7 +82,7 @@ export class Gauges extends React.Component {
                         color={colors.c3}
                     />
                 </div>
-                <div className="col-2 gp">
+                <div data-tip="Difficulty Rating" className="col-2 gp">
                     <GG 
                         cat="Difficulty"
                         icon="fa fa-bolt"
@@ -77,7 +90,7 @@ export class Gauges extends React.Component {
                         color={colors.c4}
                     />
                 </div>
-                <div className="col-2 gp">
+                <div data-tip="Value Rating" className="col-2 gp">
                     <GG 
                         cat="Worth it?"
                         icon="fa fa-money"
@@ -85,6 +98,7 @@ export class Gauges extends React.Component {
                         color={colors.c5}
                     />
                 </div>
+                <ReactTooltip />
             </div>
         );
     }

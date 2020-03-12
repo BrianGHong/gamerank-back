@@ -26,9 +26,7 @@ export class Game extends React.Component {
                         <div className="row">
                             <div className="col-xl-3 col-lg-4 col-4">
                                 {/* THUMBNAIL */}
-                                <a href="<%- gamedata.trailer %>" className="trailer-link" target="_blank">
-                                    <img className="trailer-img" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1n8t.jpg" />
-                                </a>
+                                <img className="trailer-img" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1n8t.jpg" />
                             </div>
                             <div className="col-xl-9 col-lg-8 col-8">
                                 <h1 className="game-title">Fire Emblem: Three Houses</h1>
@@ -66,6 +64,13 @@ export class Game extends React.Component {
                         {/* DETAILS */}
                         {/* MOBILE */}
                         <div className="container row d-block d-md-none"><br/>
+                        <Gauges 
+                            r1={43.1}
+                            r2={64.1}
+                            r3={50.1}
+                            r4={70.1}
+                            r5={80.1}
+                        />
                             <ul className="nav nav-tabs">
                                 <li className="nav-item">
                                     <a className="nav-link active" data-toggle="tab" href="#deet">Details</a>
@@ -95,13 +100,15 @@ export class Game extends React.Component {
                 </div>
                 
                 <div className="container">
-                    <Gauges 
-                        r1={43}
-                        r2={64}
-                        r3={50}
-                        r4={70}
-                        r5={80}
-                    />
+                    <span className="d-md-inline d-none">
+                        <Gauges
+                            r1={43.1}
+                            r2={64.1}
+                            r3={50.1}
+                            r4={70.1}
+                            r5={80.1}
+                        />
+                    </span>
                     <div style={{textAlign: "center"}}>
                         <input className="btn btn-success rating-button btn-lg" type="submit" value="Leave a Rating!"/><br/>
                         <p style={{color: "gray", fontStyle:"italic"}}>XXX users</p>

@@ -14,6 +14,10 @@ app.use(express.static(path.join(__dirname, "/client/build")));
 // API Routes
 app.use("/api/homeRoutes", homeRoutes);
 
+app.get("/api", (req, res) => {
+    res.send("Welcome to the GameGauge API!");
+});
+
 // Default Route
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, "/client/build/index.html"));

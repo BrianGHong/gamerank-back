@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 import './index.css';
 
 import {GameCard} from './GameCard';
@@ -35,6 +36,8 @@ export class Search extends React.Component {
                     r5={76.01}
                 />
                 <GameCard />
+
+                <ReactTooltip />
             </div>
         );
     }
