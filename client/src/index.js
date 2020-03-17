@@ -12,6 +12,7 @@ import {Home} from './components/Home';
 import {Search} from './components/Search';
 import {User} from './components/User';
 import {Game} from './components/Game';
+import { Crawler } from './components/Crawler';
 
 
 class App extends React.Component {
@@ -29,6 +30,9 @@ class App extends React.Component {
                     </Route>
                     <Route path="/user">
                         <User />
+                    </Route>
+                    <Route path="/crawl">
+                        <Crawler />
                     </Route>
                     <Route path="/">
                         <Home />
