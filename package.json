@@ -2,7 +2,7 @@
   "main": "app.js",
   "scripts": {
     "client": "npm run build --prefix client",
-    "start": "npm i && npm i --prefix client && npm run client && nodemon app.js",
+    "start": "npm run client && nodemon app.js",
     "dev": "concurrently \"nodemon app.js\" \" npm start --prefix client \""
   },
   "dependencies": {

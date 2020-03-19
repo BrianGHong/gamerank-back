@@ -1,0 +1,1 @@
+web: npm i --prefix client && nodemon app.js
