@@ -1,18 +1,33 @@
-const http = require('http');
-const url = require('url');
 const path = require('path');
+const mysql = require('mysql');
 const bodyParser = require("body-parser");
 
 const express = require('express');
 const app = express();
 
-const homeRoutes = require("./routes/homeRoutes.js");
-
 // Establish our static path
 app.use(express.static(path.join(__dirname, "/client/build")));
 
+// Establish database connection
+let pool = mysql.createPool({
+    connectionLimit: 10,
+    host:       'REDACTED',
+    user:       'REDACTED',
+    password:   'REDACTED',
+    database:   'REDACTED',
+});
+
+// Route modules
+const homeRoutes = require("./routes/homeRoutes.js")(pool);
+const searchRoutes = require("./routes/searchRoutes.js")(pool);
+const userRoutes = require("./routes/userRoutes.js")(pool);
+const gameRoutes = require("./routes/gameRoutes.js")(pool);
+
 // API Routes
-app.use("/api/homeRoutes", homeRoutes);
+app.use("/api/home", homeRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/game", gameRoutes);
+app.use("/api/user", userRoutes);
 
 app.get("/api", (req, res) => {
     res.send("Welcome to the GameGauge API!");

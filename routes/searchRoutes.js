@@ -4,10 +4,12 @@ const router = express.Router();
 
 module.exports = function (pool) {
     
-    router.get("/randomGame", (req, res, next) => {
+    router.get("/makeSearch", (req, res, next) => {
+        const search = req.query.search;
+        const filters = req.query.filters;
 
         // Run query
-        pool.query(`SHOW TABLES;`, (err, data) => {
+        pool.query(`SELECT * FROM Game;`, (err, data) => {
             if (err) {
                 res.send(err);
                 throw err;
@@ -17,7 +19,7 @@ module.exports = function (pool) {
     });
 
     router.get("/", (req, res) =>{
-        res.send("Home Route");
+        res.send("Search Route");
     });
 
     return router;

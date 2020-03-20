@@ -6,9 +6,9 @@ A video game scoring system, a project to apply concepts learned regarding DB de
 
 - Run command `npm install` in both the root directory and in the `client` directory.
 - Run `npm run dev` in the root directory
-- This will run the client on port `3000` and the server on port `3001`
+- This will run the client on port `3000` and the server on port `8000`
     - use port `3000` solely for developing on the front end
-    - use port `3001` to develop server (node) functionality with a preexisting client build (`3000` and `3001` do not interact directly for the time being) 
+    - use port `8000` to develop server (node) functionality with a preexisting client build (`3000` and `8000` do not interact directly for the time being) 
 
 ## Deployment
 
