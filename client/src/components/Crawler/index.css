@@ -1,0 +1,7 @@
+.summary { 
+    text-overflow: ellipsis;
+    overflow-x: hidden; 
+    overflow-y: hidden; 
+    height: 70px; 
+    /* white-space: nowrap; */
+  }
