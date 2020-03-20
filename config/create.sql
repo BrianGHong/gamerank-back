@@ -6,7 +6,13 @@ CREATE TABLE IF NOT EXISTS User (
 
 CREATE TABLE IF NOT EXISTS Game (
     gameID INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(128) NOT NULL
+    title VARCHAR(128) NOT NULL,
+    dor_details DATE NOT NULL,
+    summary_details TEXT NOT NULL,
+    url_details VARCHAR(512) NOT NULL,
+    bg_img_details VARCHAR(512) NOT NULL,
+    cover_details VARCHAR(512) NOT NULL,
+    trailer_details VARCHAR(512) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Game_details_genre (

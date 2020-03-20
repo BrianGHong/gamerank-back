@@ -44,7 +44,7 @@ export class PreviewCard extends React.Component {
         let theRest = await getTheRest({ gameID: this.props.details.id });
         this.setState({ exported: true });
         if (theRest.success) {
-            let gameQuery = "INSERT INTO Games VALUES (\n'" +
+            let gameQuery = "INSERT INTO Game VALUES (\n'" +
                 this.props.details.id + "', \n'" +
                 this.props.details.name + "', \n'" +
                 theRest.dor.toISOString().slice(0, 19).replace('T', ' ') + "', \n'" +
@@ -54,11 +54,11 @@ export class PreviewCard extends React.Component {
                 this.props.details.coverURL + "', \n'" +
                 theRest.trailer + "');\n\n";
 
-            let genreQuery = this.multivalueSQL("GameGenre", this.props.details.id, theRest.genres);
-            let modeQuery = this.multivalueSQL("GameModes", this.props.details.id, theRest.game_modes);
-            let platformQuery = this.multivalueSQL("GamePlatforms", this.props.details.id, theRest.platforms);
-            let developerQuery = this.multivalueSQL("GameDevelopers", this.props.details.id, theRest.developers);
-            let publisherQuery = this.multivalueSQL("GamePublishers", this.props.details.id, theRest.publishers);
+            let genreQuery = this.multivalueSQL("Game_details_genre", this.props.details.id, theRest.genres);
+            let modeQuery = this.multivalueSQL("Game_details_gamemodes", this.props.details.id, theRest.game_modes);
+            let platformQuery = this.multivalueSQL("Game_details_platforms", this.props.details.id, theRest.platforms);
+            let developerQuery = this.multivalueSQL("Game_details_developers", this.props.details.id, theRest.developers);
+            let publisherQuery = this.multivalueSQL("Game_details_publishers", this.props.details.id, theRest.publishers);
 
             let allQueries = gameQuery + genreQuery + modeQuery + platformQuery + developerQuery + publisherQuery;
             this.download(allQueries, './export-test' + this.props.details.id + '.sql', 'text/plain');

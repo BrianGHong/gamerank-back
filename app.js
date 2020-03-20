@@ -11,10 +11,10 @@ app.use(express.static(path.join(__dirname, "/client/build")));
 // Establish database connection
 let pool = mysql.createPool({
     connectionLimit: 10,
-    host:       'REDACTED',
-    user:       'REDACTED',
-    password:   'REDACTED',
-    database:   'REDACTED',
+    host:       'us-cdbr-iron-east-04.cleardb.net',
+    user:       'b02d13aa4c36dc',
+    password:   '8f54ac2e',
+    database:   'heroku_b601b5ee8d9ef28',
 });
 
 // Route modules
