@@ -27,7 +27,6 @@ export class User extends React.Component {
                     <GameIcon title="Hello" url="https://images.igdb.com/igdb/image/upload/t_cover_big/co1n83.jpg" />
                     <GameIcon title="Hello" url="https://images.igdb.com/igdb/image/upload/t_cover_big/co1rgi.jpg" />
                     <GameIcon title="Hello" url="https://images.igdb.com/igdb/image/upload/t_cover_big/co1v2p.jpg" />
-
                 </div>
                 <form>
                     <button className="btn-lg btn-danger" type="submit" style={{borderRadius: "20px"}}><i className="fa fa-arrow-down"></i> Load more</button>
