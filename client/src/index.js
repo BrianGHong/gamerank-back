@@ -16,15 +16,6 @@ import {Game} from './components/Game';
 import { Crawler } from './components/Crawler';
 
 
-const LoadingIndicator = props => {
-    const {promiseInProgress} = usePromiseTracker();
-    return (
-        promiseInProgress && (
-            <h1>Loading...</h1>
-        )
-    );    
-}
-
 class App extends React.Component {
 
     render() {
@@ -38,7 +29,6 @@ class App extends React.Component {
                     <Route path="/crawl" component={Crawler} />
                     <Route path="/" component={Home} />
                 </Switch>
-                <LoadingIndicator/>
                 <Footer />
             </div>
         );

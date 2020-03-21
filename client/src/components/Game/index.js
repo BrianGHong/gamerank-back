@@ -24,7 +24,7 @@ export class Game extends React.Component {
     gameData(gid) {
         // Retrieve GameData
         axios
-            .get(`http://localhost:8000/api/game/getgame/${gid}`)
+            .get(`${process.env.REACT_APP_API_URL || process.env.REACT_APP_API_DEV_URL}/api/game/getgame/${gid}`)
             .then(result => {
                 this.setState({
                     gameData: result.data,

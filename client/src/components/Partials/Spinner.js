@@ -11,10 +11,15 @@ export class Spinner extends React.Component {
         const custom = css`
             display: block;
             margin: 0 auto;
+            margin-top: 20vh;
         `;
 
+        const divStyle= {
+            "height": "100vh"
+        };
+
         return (
-            <div className="container d-block"><br/>
+            <div className="container d-block" style={divStyle}>
                 <PacmanLoader
                     css={custom}
                     color={"orange"}
