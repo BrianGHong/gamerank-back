@@ -1,9 +1,12 @@
 const path = require('path');
 const mysql = require('mysql');
-const bodyParser = require("body-parser");
 
 const express = require('express');
 const app = express();
+
+var cors = require('cors');
+app.use(cors());
+
 
 // Establish our static path
 app.use(express.static(path.join(__dirname, "/client/build")));
@@ -14,7 +17,7 @@ let pool = mysql.createPool({
     host:       'us-cdbr-iron-east-04.cleardb.net',
     user:       'b02d13aa4c36dc',
     password:   '8f54ac2e',
-    database:   'heroku_b601b5ee8d9ef28',
+    database:   'heroku_b601b5ee8d9ef28'
 });
 
 // Route modules

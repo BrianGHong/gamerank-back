@@ -5,7 +5,7 @@ A video game scoring system, a project to apply concepts learned regarding DB de
 ## Development
 
 - Run command `npm install` in both the root directory and in the `client` directory.
-- Run `npm run dev` in the root directory
+- Run `npm run dev` in the root directory and `npm start` in the client directory
 - This will run the client on port `3000` and the server on port `8000`
     - use port `3000` solely for developing on the front end
     - use port `8000` to develop server (node) functionality with a preexisting client build (`3000` and `8000` do not interact directly for the time being) 
@@ -24,6 +24,7 @@ If you want to test the development build locally, please run `heroku local web`
 ## Resources
 
 Resources used/referenced during development.
+- https://codeburst.io/node-js-mysql-and-promises-4c3be599909b
 - https://github.com/rohan-paul/material-ui-table-with-node-mongodb
 - https://github.com/styleguidist/react-styleguidist/issues/1321
 - https://www.npmjs.com/package/react-gaugejs

@@ -1,56 +1,61 @@
 const express = require("express");
 const router = express.Router();
 
+const database = require("../database");
 
 module.exports = function (pool) {
-    
-    router.get("/getgame/:id", (req, res) => {
+
+    /**
+     * GET METHOD
+     * Returns ALL metadata associated with a particular game
+     */
+    router.get("/getgame/:id", async function(req, res) {
         const gameID = req.params.id;
-
-        /**
-         * Helper method: makes queries to each detail table, returning its object properties
-         * @param {*} attribute column name
-         * @param {*} table details table
-         * @param {*} gid game ID
-         */
-        function getDeet(attribute, table, gid) {
-            pool.query(`SELECT ${attribute} FROM ${table} WHERE gameID = ${gid}`, (err, data) => {
-                if (err) {
-                    throw err;
+        let genre=[], dev=[], pub=[], plat=[], gamemode=[];
+        let gameObj = {};
+        // Query chain to receive all of the data associated with each multi-value detail attribute
+        await database.query(`SELECT genre_name FROM Game_details_genre WHERE gameID=${gameID}`, pool)
+            .then(rows => {
+                for (let i in rows) {
+                    genre.push(rows[i]["genre_name"])
                 }
-                // Iterate if there are multiple attributes
-                let ret = {};
-                try {
-                    for (let i=0; i<data.length; i++) {
-                        const ele = JSON.parse(JSON.stringify(data[i]));
-                        ret[`${i}`] = ele[attribute];
-                    }
-                    console.log(ret);
-                    return ret;
-
-                } catch(err) {
-                    console.error(err);
-                    return null;
+                return database.query(`SELECT developer_name FROM Game_details_developers WHERE gameID=${gameID}`, pool)
+            }).catch(err => res.send(err))
+            .then(rows => {
+                for (let i in rows) {
+                    dev.push(rows[i]["developer_name"])
                 }
-            });
-        }
-
-        const gameObj = {
-            "details_genre": JSON.parse(JSON.stringify(getDeet('genre_name', 'Game_details_genre', gameID))),
-            "details_developers": getDeet('developer_name', 'Game_details_developers', gameID),
-            "details_publishers": getDeet('publisher_name', 'Game_details_publishers', gameID),
-            "details_platforms": getDeet('platform_type', 'Game_details_platforms', gameID)
-        };
-        
-        // Run query
-        const sql = `SELECT * FROM Game WHERE gameID = ${gameID}`;
-        pool.query(sql, (err, data) => {
-            if (err) {
-                res.send(err);
-                throw err;
-            }
-            res.send(data);
-        });
+                return database.query(`SELECT publisher_name FROM Game_details_publishers WHERE gameID=${gameID}`, pool)
+            }).catch(err => res.send(err))
+            .then(rows => {
+                for (let i in rows) {
+                    pub.push(rows[i]["publisher_name"])
+                }
+                return database.query(`SELECT platform_type FROM Game_details_platforms WHERE gameID=${gameID}`, pool)
+            }).catch(err => res.send(err))
+            .then(rows => {
+                for (let i in rows) {
+                    plat.push(rows[i]["platform_type"])
+                }
+                return database.query(`SELECT gamemode_type FROM Game_details_gamemodes WHERE gameID=${gameID}`, pool)
+            }).catch(err => res.send(err))
+            .then(rows => {
+                for (let i in rows) {
+                    gamemode.push(rows[i]["gamemode_type"])
+                }
+                // FINALLY we query the actual game database for the actual game meta
+                return database.query(`SELECT * FROM Game WHERE gameID=${gameID}`, pool);
+            }).catch(err => res.send(err))
+            // Once we receive the actual data, we can now begin to formulate one, unified game object to return to the client
+            .then(rows => {
+                gameObj = rows[0];
+                gameObj["genre"] = genre;
+                gameObj["developers"] = dev;
+                gameObj["publishers"] = pub;
+                gameObj["platforms"] = plat;
+                gameObj["gamemodes"] = gamemode;
+                res.send(gameObj);
+            }).catch(err => res.send(err));
     });
 
     router.get("/", (req, res) =>{

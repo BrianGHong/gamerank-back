@@ -2,18 +2,18 @@
   "main": "app.js",
   "scripts": {
     "client": "npm run build --prefix client",
-    "preinstall": "npm install --prefix client",
-    "start": "npm run client && nodemon app.js",
-    "dev": "concurrently \"nodemon app.js\" \" npm start --prefix client \""
+    "server": "nodemon app.js",
+    "start": "npm run client && npm run server",
+    "dev": "npm run server"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "node": "^13.8.0",
-    "nodemon": "^2.0.2",
     "react-move": "^6.1.0",
     "react-tooltip": "^4.0.5"
   }
