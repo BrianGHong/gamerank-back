@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import {Gauges} from './Gauges'; // Game Gauge >:)
 import {Spinner} from '../Partials/Spinner';
+import {ErrorPage} from '../Partials/Error';
 
 import './index.css';
 
@@ -44,7 +45,7 @@ export class Game extends React.Component {
             result = <Spinner />;
         }
         else {
-            result = (
+            result = (!this.state.gameData.title) ? <ErrorPage status="404" message="We could not find that game."/> : (
                 <div>
                     <div style={{
                         backgroundImage: 'url(' + this.state.gameData.bg_img_details + ')',
