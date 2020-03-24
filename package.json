@@ -1,11 +1,9 @@
 {
   "main": "app.js",
   "scripts": {
-    "client": "npm run build --prefix client",
-    "server": "nodemon app.js",
-    "start": "npm run client && npm run server",
-    "dev": "npm run server"
-  },
+    "postinstall": "cd client && npm install && npm run build",
+    "start": "nodemon app.js"
+   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
