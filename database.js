@@ -5,6 +5,6 @@ exports.query = function (sql, pool) {
             if (err)
                 return reject(err);
             resolve(rows);
-        });
+        })
     });
 }

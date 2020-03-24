@@ -14,6 +14,7 @@ import {Search} from './components/Search';
 import {User} from './components/User';
 import {Game} from './components/Game';
 import { Crawler } from './components/Crawler';
+import {Login, Register} from './components/Creds';
 
 
 class App extends React.Component {
@@ -25,7 +26,9 @@ class App extends React.Component {
                 <Switch>
                     <Route path="/game/:g" component={Game} />
                     <Route path="/search" component={Search} />
-                    <Route path="/user" component={User} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Register} />
+                    <Route path="/dashboard" component={User} />
                     <Route path="/crawl" component={Crawler} />
                     <Route path="/" component={Home} />
                 </Switch>

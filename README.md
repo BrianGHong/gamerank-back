@@ -24,6 +24,7 @@ If you want to test the development build locally, please run `heroku local web`
 ## Resources
 
 Resources used/referenced during development.
+- https://www.codementor.io/@mayowa.a/how-to-build-a-simple-session-based-authentication-system-with-nodejs-from-scratch-6vn67mcy3
 - https://codeburst.io/node-js-mysql-and-promises-4c3be599909b
 - https://github.com/rohan-paul/material-ui-table-with-node-mongodb
 - https://github.com/styleguidist/react-styleguidist/issues/1321

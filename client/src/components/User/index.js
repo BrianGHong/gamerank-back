@@ -12,10 +12,8 @@ export class User extends React.Component {
     render() {
         return (
             <div className="container">
-                <h1>Hi, BrianGH</h1>
-                <button className="btn btn-danger" style={{borderRadius: "20px"}}>Change Password</button><br/><br/>
             
-                <h1>Your Favorites: </h1>
+                <h1>User's Favorites: </h1>
                 <div id="gamecards" className="card-deck">
                     <GameIcon title="Hello" url="https://images.igdb.com/igdb/image/upload/t_cover_big/co1n8t.jpg" />
                     <GameIcon title="Hello" url="https://images.igdb.com/igdb/image/upload/t_cover_big/co1j0g.jpg" />
@@ -30,6 +28,9 @@ export class User extends React.Component {
                 </div>
                 <form>
                     <button className="btn-lg btn-danger" type="submit" style={{borderRadius: "20px"}}><i className="fa fa-arrow-down"></i> Load more</button>
+                </form>
+                <form action={`${process.env.REACT_APP_BASE_URL}/user/logout`} method="post">
+                    <input className="btn btn-warning" type="submit" value="Sign Out" />
                 </form>
             </div>
         );

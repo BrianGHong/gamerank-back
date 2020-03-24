@@ -1,5 +1,8 @@
 const path = require('path');
 const mysql = require('mysql');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 const express = require('express');
 const app = express();
@@ -7,6 +10,28 @@ const app = express();
 var cors = require('cors');
 app.use(cors());
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
+
+// Define Session Obj
+app.use(session({
+    key: 'user_sid',
+    secret: 'shhh',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    }
+}));
+
+// Check if cookie is still in browser
+app.use((req, res, next) => {
+    if (req.cookies.user_sid && !req.session.user) {
+        res.clearCookie('user_sid');
+    } else {
+        next();
+    }
+});
 
 // Establish our static path
 app.use(express.static(path.join(__dirname, "/client/build")));
@@ -20,6 +45,12 @@ let pool = mysql.createPool({
     database:   'heroku_b601b5ee8d9ef28'
 });
 
+// Session Getters/Setters
+app.get('/getSession', (req, res) => {
+    console.log('Session: ' + JSON.stringify(req.session));
+    res.send({'username': req.session.user});
+});
+
 // Route modules
 const homeRoutes = require("./routes/homeRoutes.js")(pool);
 const searchRoutes = require("./routes/searchRoutes.js")(pool);
@@ -27,14 +58,10 @@ const userRoutes = require("./routes/userRoutes.js")(pool);
 const gameRoutes = require("./routes/gameRoutes.js")(pool);
 
 // API Routes
-app.use("/api/home", homeRoutes);
-app.use("/api/search", searchRoutes);
-app.use("/api/game", gameRoutes);
-app.use("/api/user", userRoutes);
-
-app.get("/api", (req, res) => {
-    res.send("Welcome to the GameGauge API!");
-});
+app.use("/home", homeRoutes);
+app.use("/search", searchRoutes);
+app.use("/game", gameRoutes);
+app.use("/user", userRoutes);
 
 // Default Route
 app.get('/*', (req, res) => {

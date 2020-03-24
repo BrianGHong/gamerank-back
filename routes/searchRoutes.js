@@ -20,9 +20,5 @@ module.exports = function (pool) {
         });        
     });
 
-    router.get("/", (req, res) =>{
-        res.send("Search Route");
-    });
-
     return router;
 };
