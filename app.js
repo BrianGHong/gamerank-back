@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const database = require('./database');
 
 const express = require('express');
 const app = express();
@@ -45,10 +46,18 @@ let pool = mysql.createPool({
     database:   'heroku_b601b5ee8d9ef28'
 });
 
-// Session Getters/Setters
+// Session Getters
 app.get('/getSession', (req, res) => {
-    console.log('Session: ' + JSON.stringify(req.session));
-    res.send({'username': req.session.user});
+    console.log(JSON.stringify(req.session));
+    const email = req.session.user;
+    if (email) {
+        database.query(`SELECT username FROM User WHERE user_email='${email}'`, pool)
+        .then(result => {
+            res.send({'email': req.session.user, 'username': result[0].username});
+        }).catch(err => console.error(err));
+    } else {
+        res.send({});
+    }
 });
 
 // Check Session, have dashboard redirect to login page if user

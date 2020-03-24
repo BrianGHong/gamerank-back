@@ -5,16 +5,16 @@ export class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: "Login"
+            username: undefined
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         axios
             .get(`${process.env.REACT_APP_BASE_URL}/getSession`)
             .then(result => {
                 this.setState({
-                    user: result.data.user,
+                    username: result.data.username,
                 });
             })
             .catch(err => {
@@ -23,6 +23,7 @@ export class Navbar extends React.Component {
     }
 
     render() {
+        
 
         return (
             <div>
@@ -49,13 +50,32 @@ export class Navbar extends React.Component {
                                     </form>
                                 </li>
                             </ul>
-                            <a className="gg-item nav-item btn btn-outline-light" style={{marginTop: "2px", borderRadius: "20px"}} href="/login">
-                                <i className="fa fa-user"></i> {this.state.user}
-                            </a>
+                            <TopRightIcon username={this.state.username} />
                         </div>
                     </div>
                 </nav>
             </div>
+        );
+    }
+}
+
+class TopRightIcon extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        if (this.props.username) {
+            return (
+                <a className="gg-item nav-item btn btn-outline-light" style={{marginTop: "2px", borderRadius: "20px"}} href="/dashboard">
+                    <i className="fa fa-gamepad"></i> {this.props.username}
+                </a>
+            );
+        }
+        return (
+            <a className="nav-item btn btn-outline-light" style={{marginTop: "2px", borderRadius: "20px"}} href="/login">
+                <i className="fa fa-user"></i> Login
+            </a>
         );
     }
 }
