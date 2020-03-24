@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const database = require("../database");
+
 
 module.exports = function (pool) {
     
@@ -16,10 +18,6 @@ module.exports = function (pool) {
             }
             res.send(data);
         });        
-    });
-
-    router.get("/", (req, res) =>{
-        res.send("Search Route");
     });
 
     return router;
