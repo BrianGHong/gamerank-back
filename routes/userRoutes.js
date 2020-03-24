@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const router = express.Router();
 
 const database = require("../database");
@@ -35,7 +36,6 @@ module.exports = function (pool) {
      * POST Registers a user onto the site
      */
     router.post('/register', checkExists, async (req, res) => {
-        console.log(req.body);
         // Ensure Password is longer than 8 characters
         if (req.body.password.length < 8) {
             res.redirect('/register?error=Password must be at least 8 characters');
@@ -43,7 +43,8 @@ module.exports = function (pool) {
         } else if (!((/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).test(req.body.email))) {
             res.redirect('/register?error=Entered invalid email address');
         } else {
-            await database.query(`INSERT INTO User VALUES ('${req.body.email}', '${req.body.username}', '${req.body.password}')`, pool)
+            // Hash password
+            await database.query(`INSERT INTO User VALUES ('${req.body.email}', '${req.body.username}', '${bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))}')`, pool)
             .then(user => {       
                 res.redirect('/login?success=Account Created!');
             })
@@ -58,11 +59,16 @@ module.exports = function (pool) {
         if (!req.body.email || !req.body.password) {
             res.redirect('/login?error=Please enter all fields before logging in.')
         } else {
-            const sql = `SELECT * FROM User WHERE pass='${req.body.password}' AND user_email='${req.body.email}'`;
+            const sql = `SELECT * FROM User WHERE user_email='${req.body.email}'`;
             await database.query(sql, pool)
             .then(async result => {
                 if (result.length > 0) {
-                    next();
+                    if (bcrypt.compareSync(req.body.password, result[0]["pass"]) === true) {
+                        next();
+                    } else {
+                        res.redirect('/login?error=Incorrect username or password');
+                        console.log(result[0]["pass"]);
+                    }
                 } else {
                     res.redirect('/login?error=Incorrect username or password');
                 }
