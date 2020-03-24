@@ -6,20 +6,6 @@ const database = require("../database");
 
 module.exports = function (pool) {
 
-    // Verify Session
-    function sessionChecker(req, res, next) {
-        if (req.session.user && req.cookies.user_sid) {
-            res.redirect('/dashboard');
-        } else {
-            next();
-        }
-    }
-
-    // Check Session
-    router.get('/dashboard', sessionChecker, (req, res) => {
-        res.redirect('/login');
-    });
-
     // Check if Email address of Username already exists in the database
     const checkExists = async (req, res, next) => {
         if (!req.body.email || !req.body.username || !req.body.password) {

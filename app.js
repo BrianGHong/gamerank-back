@@ -51,6 +51,16 @@ app.get('/getSession', (req, res) => {
     res.send({'username': req.session.user});
 });
 
+// Check Session, have dashboard redirect to login page if user
+// is not logged in
+app.get('/dashboard', (req, res, next) => {
+    if (!req.session.user | !req.cookies.user_sid) {
+        res.redirect('/login');
+    } else {
+        next();
+    }
+});
+
 // Route modules
 const homeRoutes = require("./routes/homeRoutes.js")(pool);
 const searchRoutes = require("./routes/searchRoutes.js")(pool);

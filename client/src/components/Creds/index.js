@@ -45,7 +45,7 @@ export class Login extends React.Component {
                         <input className="form-control" type="text" name="email" placeholder="Email" style={{margin: "4px"}}/>
                         <input className="form-control" type="password" name="password" placeholder="Password" style={{margin: "4px"}}/>
                         <input className="btn btn-success" type="submit" value="Login" /><br/>
-                        <p><a href="/user/register">Register here</a></p>
+                        <p><a href="/register">Register here</a></p>
                     </form>
                 </div>
             </div>
@@ -76,7 +76,7 @@ export class Register extends React.Component {
                         <input className="form-control" type="password" name="password" placeholder="Password" style={{margin: "4px"}}/>
                         <input className="btn btn-success" type="submit" value="Register" />
                         <br/>
-                        <p><a href="/user/login">Login here</a></p>
+                        <p><a href="/login">Login here</a></p>
                     </form>
                 </div>
             </div>
