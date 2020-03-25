@@ -22,15 +22,16 @@ module.exports = function (pool) {
      * GET Most Favorited Game
      * Returns an object that contains a game's ID and title
      */
-    router.get("/mostFavorites", async(req, res) => {
-        await database.query(
+    router.get("/mostFavorites", (req, res) => {
+        database.query(
             'SELECT gameID, COUNT(gameID) AS mostFavorite FROM favorites GROUP BY gameID ORDER BY mostFavorite DESC LIMIT 1', pool
         ).then(result => {
-            return database.query(`SELECT gameID, title FROM Game WHERE gameID=${result[0]["gameID"]}`, pool)
-        }).catch(err => res.send(err))
-        .then(result => {
-            res.send(result[0]);
-        }).catch(err => res.send(err));
+            if (result.length > 0) {
+                return database.query(`SELECT gameID, title FROM Game WHERE gameID=${result[0]["gameID"]}`, pool);
+            } else {
+                return {};
+            }
+        }).catch(err => res.send({}));
     });
 
     /**

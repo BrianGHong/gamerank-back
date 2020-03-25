@@ -12,6 +12,7 @@ export class Game extends React.Component {
         super(props);
         this.state = {
             loading: true,
+            gameID: 0,
             gameData: {},
             error: {}
         };
@@ -19,7 +20,10 @@ export class Game extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.g;
-        this.gameData(id)
+        this.setState({
+            gameID: id
+        });
+        this.gameData(id);
     }
 
     gameData(gid) {
@@ -64,9 +68,9 @@ export class Game extends React.Component {
                                     
                                     <form>
                                         {/* FAVORITE */}
-                                        <button className="btn btn-danger" style={{borderRadius: "20px"}}>
-                                            <i className="fa fa-heart"></i> 13 <span className="d-none d-md-inline">Favorites</span>
-                                        </button>
+                                        <Favorites
+                                            gid={this.state.gameID}
+                                        />
                                         {/* Watch Trailer */}
                                         <a className="btn btn-primary" style={{borderRadius: "20px", marginLeft: "5px", color: "white"}} target="_blank" href={this.state.gameData.trailer_details}>
                                             <i className="fa fa-film"></i> <span className="d-none d-sm-inline">Trailer</span>
@@ -175,5 +179,92 @@ class Details extends React.Component {
                 <h5>Genre(s): <span className="detail-card-info">{this.props.genre}</span></h5>
             </div>
         );
+    }
+}
+
+// Favorites Component
+class Favorites extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            favorite: false,
+            favCount: 0
+        }
+
+        this.isFavorite = this.isFavorite.bind(this);
+        this.favCount = this.favCount.bind(this);
+        this.updateFavorite = this.updateFavorite.bind(this);
+    }
+
+    componentDidMount() {
+        this.favCount(this.props.gid);
+        this.isFavorite(this.props.gid);
+    }
+
+    isFavorite(gid) {
+        axios
+            .get(`${process.env.REACT_APP_BASE_URL}/game/isFavorite/${gid}`)
+            .then(result => {
+                if (result.data.isFavorite) {
+                    this.setState({
+                        favorite: true,
+                    });
+                } else {
+                    this.setState({
+                        favorite: false,
+                    });
+                }
+            })
+            .catch(err => {
+                this.setState({
+                    error: err
+                });
+            });
+    }
+
+    favCount(gid) {
+        axios
+            .get(`${process.env.REACT_APP_BASE_URL}/game/favCount/${gid}`)
+            .then(result => {
+                this.setState({
+                    favCount: result.data.favCount,
+                });
+            })
+            .catch(err => {
+                this.setState({
+                    error: err
+                });
+            });
+    }
+
+    updateFavorite(gid) {
+        axios
+            .post(`${process.env.REACT_APP_BASE_URL}/game/updateFavorite/${gid}`)
+            .then(result => {
+                this.isFavorite(gid);
+                this.favCount(gid);
+            })
+            .catch(err => {
+                this.setState({
+                    error: err
+                });
+            });
+    }
+
+    render() {
+        if (this.state.favorite) {
+            return (
+                <button onClick={() => this.updateFavorite(this.props.gid)} className="btn btn-secondary" style={{borderRadius: "20px"}}>
+                    <i className="fa fa-heart"></i> <span className="d-none d-md-inline">Favorited!</span>
+                </button>
+                
+            );
+        } else {
+            return (
+                <button onClick={() => this.updateFavorite(this.props.gid)} className="btn btn-danger" style={{borderRadius: "20px"}}>
+                    <i className="fa fa-heart"></i> {this.state.favCount} <span className="d-none d-md-inline">Favorite(s)</span>
+                </button>
+            );
+        }
     }
 }
