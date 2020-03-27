@@ -43,10 +43,10 @@ module.exports = function (pool) {
             'SELECT gameID, COUNT(gameID) AS mostPopular FROM scores GROUP BY gameID ORDER BY mostPopular DESC LIMIT 1', pool
         ).then(result => {
             return database.query(`SELECT gameID, title FROM Game WHERE gameID=${result[0]["gameID"]}`, pool)
-        }).catch(err => res.send(err))
+        }).catch(err => console.log('User not logged in.'))
         .then(result => {
             res.send(result[0]);
-        }).catch(err => res.send(err));
+        }).catch(err => console.log('User not logged in.'));
     });
 
 

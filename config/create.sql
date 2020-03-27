@@ -70,5 +70,17 @@ CREATE TABLE IF NOT EXISTS scores (
     s_gameplay INT NOT NULL,
     s_art INT NOT NULL,
     s_difficulty INT NOT NULL,
-    s_value INT NOT NULL
+    s_value INT NOT NULL,
+    CONSTRAINT checkRanges CHECK (
+        s_story <= 100
+        AND s_story >= 0
+        AND s_gameplay <= 100
+        AND s_gameplay >= 0
+        AND s_art <= 100
+        AND s_art >= 0
+        AND s_difficulty <= 100
+        AND s_difficulty >= 0
+        AND s_value <= 100
+        AND s_value >= 0
+    )
 );
