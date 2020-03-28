@@ -3,6 +3,7 @@ import React from 'react';
 import {Gauges} from './Gauges'; // Game Gauge >:)
 import {Spinner} from '../Partials/Spinner';
 import {ErrorPage} from '../Partials/Error';
+import {Favorites} from './Favorite';
 
 import './index.css';
 
@@ -12,6 +13,7 @@ export class Game extends React.Component {
         super(props);
         this.state = {
             loading: true,
+            gameID: 0,
             gameData: {},
             error: {}
         };
@@ -19,7 +21,10 @@ export class Game extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.g;
-        this.gameData(id)
+        this.setState({
+            gameID: id
+        });
+        this.gameData(id);
     }
 
     gameData(gid) {
@@ -64,9 +69,9 @@ export class Game extends React.Component {
                                     
                                     <form>
                                         {/* FAVORITE */}
-                                        <button className="btn btn-danger" style={{borderRadius: "20px"}}>
-                                            <i className="fa fa-heart"></i> 13 <span className="d-none d-md-inline">Favorites</span>
-                                        </button>
+                                        <Favorites
+                                            gid={this.state.gameID}
+                                        />
                                         {/* Watch Trailer */}
                                         <a className="btn btn-primary" style={{borderRadius: "20px", marginLeft: "5px", color: "white"}} target="_blank" href={this.state.gameData.trailer_details}>
                                             <i className="fa fa-film"></i> <span className="d-none d-sm-inline">Trailer</span>
@@ -81,10 +86,11 @@ export class Game extends React.Component {
                                     {/* DESKTOP */}
                                     <div className="d-none d-md-block">
                                         <Details
-                                            dor={Date(this.state.gameData.dor_details).substring(0,16)}
-                                            dev={this.state.gameData.developers.join(', ')}
-                                            plat={this.state.gameData.platforms.join(', ')}
-                                            genre={this.state.gameData.genre.join(', ')}
+                                            dor={this.state.gameData.dor_details}
+                                            dev={this.state.gameData.developers}
+                                            pub={this.state.gameData.publishers}
+                                            plat={this.state.gameData.platforms}
+                                            genre={this.state.gameData.genre}
                                         />
                                         <div className="details-summary">
                                             <p>{this.state.gameData.summary_details}</p>
@@ -115,6 +121,7 @@ export class Game extends React.Component {
                                         <Details
                                             dor={this.state.gameData.dor_details}
                                             dev={this.state.gameData.developers}
+                                            pub={this.state.gameData.publishers}
                                             plat={this.state.gameData.platforms}
                                             genre={this.state.gameData.genre}
                                         />
@@ -167,12 +174,18 @@ class Details extends React.Component {
     }
 
     render() {
+        const dateOld = this.props.dor.substring(0,10);
+        const m = parseInt(dateOld.substring(5,7));
+        const d = parseInt(dateOld.substring(8,10));
+        const y = dateOld.substring(0,4);
+        const dateNew = m + '/' + d + '/' + y; 
         return (
             <div className="quick-deets">
-                <h5>Released: <span className="detail-card-info">{this.props.dor}</span></h5>
-                <h5>Developer(s): <span className="detail-card-info">{this.props.dev}</span></h5>
-                <h5>Platform(s): <span className="detail-card-info">{this.props.plat}</span></h5>
-                <h5>Genre(s): <span className="detail-card-info">{this.props.genre}</span></h5>
+                <h5>Released: <span className="detail-card-info">{dateNew}</span></h5>
+                <h5>Developer(s): <span className="detail-card-info">{this.props.dev.join(', ')}</span></h5>
+                <h5>Publisher(s): <span className="detail-card-info">{this.props.pub.join(', ')}</span></h5>
+                <h5>Platform(s): <span className="detail-card-info">{this.props.plat.join(', ')}</span></h5>
+                <h5>Genre(s): <span className="detail-card-info">{this.props.genre.join(', ')}</span></h5>
             </div>
         );
     }

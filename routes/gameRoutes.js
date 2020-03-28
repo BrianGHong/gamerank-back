@@ -58,8 +58,70 @@ module.exports = function (pool) {
             }).catch(err => res.send(err));
     });
 
-    router.get("/", (req, res) =>{
-        res.send("Game Route");
+    /**
+     * POST Add/remove game from favorites
+     */
+    router.post("/updateFavorite/:gid", (req, res) => {
+        const email = req.session.user;
+        const gid = req.params.gid;
+        // ensure user is logged in
+        if (email) {
+            console.log('User is logged in');
+            database.query(`SELECT * FROM favorites WHERE user_email='${email}' AND gameID='${gid}'`, pool)
+            .then(result => {
+                // If user has not favorited this game
+                if (result.length < 1) {
+                    console.log("FAVORITE");
+                    database.query(`INSERT INTO favorites VALUES (${gid}, '${email}')`, pool).catch(err => {console.error(err)});
+                // If user has ALREADY favorited this game
+                } else {
+                    console.log("UNFAVORITE");
+                    database.query(`DELETE FROM favorites WHERE user_email='${email}' AND gameID='${gid}'`, pool).catch(err => {console.error(err)});
+                }
+            }).catch(err => console.error(err));
+        } else {
+            console.log('User is NOT logged in');
+            res.send({});
+        }
+    });
+
+    /**
+     * GET Check if user has favorited the current game
+     */
+    router.get("/isFavorite/:gid", (req, res) => {
+        const email = req.session.user;
+        const gid = req.params.gid;
+        if (email) {
+            database.query(`SELECT * FROM favorites WHERE user_email='${email}' AND gameID='${gid}'`, pool)
+            .then(result => {
+                if (result.length > 0) {
+                    res.send({"isFavorite": true});
+                } else {
+                    res.send({});
+                }
+            }).catch(err => {console.error(err)});
+        } else {
+            res.send({});
+        }
+    });
+
+    /**
+     * POST Count number of favorites
+     */
+    router.get("/favCount/:gid", (req, res) => {
+        const gid = req.params.gid;
+        database.query(`SELECT COUNT(*) as favCount FROM favorites WHERE gameID=${gid}`, pool)
+        .then(result => {
+            res.send({"favCount": result[0].favCount});
+        })
+        .catch(err => console.error(err));
+    });
+
+    /**
+     * POST Give a game a score (update score if u already did so)
+     */
+    router.post("/scoreGame", (req, res) => {
+        
     });
 
     return router;
