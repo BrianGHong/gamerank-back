@@ -20,13 +20,13 @@ export class GameCard extends React.Component {
 
         return (
             <div>
-                <Link className="card gamecard" to="/game">
+                <a className="card gamecard" href={`/game/${this.props.gameID}`}>
                     <div className="row">
                         <div className="col-lg-2 col-md-3 col-4">
-                            <img className="game-img" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1n8t.jpg" />
+                            <img className="game-img" src={this.props.img} />
                         </div>
                         <div className="col-lg-10 col-md-9 col-8" style={{marginTop: "10px"}}>
-                            <h2 style={{wordWrap: "break-word"}}>The Legend of Zelda</h2>
+                            <h2 style={{wordWrap: "break-word"}}>{this.props.title}</h2>
                             <div className="rates row">
                                 <div data-tip="Story Rating" className="col-lg-1 col-2">
                                     <Gauge
@@ -64,12 +64,12 @@ export class GameCard extends React.Component {
                                     />
                                 </div>
                             </div>
-                            <div className="genres row">
+                            {/* <div className="genres row">
                                 Action Role-playing
-                            </div>
+                            </div> */}
                         </div>
                     </div>
-                </Link><br />
+                </a><br />
             </div>
         );
     }

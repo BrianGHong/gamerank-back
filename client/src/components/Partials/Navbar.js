@@ -40,7 +40,7 @@ export class Navbar extends React.Component {
                         <div className="collapse navbar-collapse nav-item" id="navbarToggler">
                             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                                 <li>
-                                    <form className="form-inline" action="/search">
+                                    <form className="form-inline" action="/search" method="get">
                                         <div className="input-group" role="group">
                                             <input name="s" className="form-control" style={{borderTopLeftRadius: "20px", borderBottomLeftRadius: "20px"}} type="search" placeholder="Search" aria-label="Search" />
                                             <div className="input-group-append">

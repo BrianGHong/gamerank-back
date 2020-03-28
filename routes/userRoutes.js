@@ -42,6 +42,8 @@ module.exports = function (pool) {
         // Ensure email address is valid
         } else if (!((/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).test(req.body.email))) {
             res.redirect('/register?error=Entered invalid email address');
+        } else if (req.body.username.length < 5){
+            res.redirect('/register?error=Username must be longer than 4 characters');
         } else {
             // Hash password
             await database.query(`INSERT INTO User VALUES ('${req.body.email}', '${req.body.username}', '${bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))}')`, pool)
@@ -92,6 +94,51 @@ module.exports = function (pool) {
         console.log('Logged out!');
         res.clearCookie('user_sid');
         res.redirect('/login');
+    });
+
+    /**
+     * GET User's Favorites List
+     */
+    router.get('/getUserFavorites', (req, res) => {
+        const email = req.session.user;
+        if (email) {
+            database.query(`SELECT gameID, title, cover_details FROM favorites NATURAL JOIN Game WHERE user_email='${email}'`, pool)
+            .then(result => {
+                if (result.length > 0) {
+                    res.send(result);
+                } else {
+                    res.send([]);
+                }
+            }).catch(err => {console.error(err)});
+        } else {
+            res.send([]);
+        }
+    });
+
+    /**
+     * POST Update Username
+     */
+    router.post('/updateUsername', (req, res) => {
+        const email = req.session.user;
+        if (email) {
+            if (req.body.username.length > 4) {
+                database.query(`SELECT * FROM User WHERE username='${req.body.username}'`, pool)
+                .then(result => {
+                    if (result.length == 0) {
+                        database.query(`UPDATE User SET username='${req.body.username}' WHERE user_email='${req.session.user}'`, pool)
+                        .then(result => {
+                            res.redirect('/dashboard?success=Username updated!');
+                        }).catch(err => console.error(err))
+                    } else {
+                        res.redirect('/dashboard?error=That username has already been taken!');
+                    }
+                }).catch(err => console.error(err));
+            } else {
+                res.redirect('/dashboard?error=Username must be longer than 5 characters');
+            }
+        } else {
+            res.redirect('/dashboard?error=An unknown error has occurred');
+        }
     });
 
     return router;

@@ -3,6 +3,7 @@ import React from 'react';
 import {Gauges} from './Gauges'; // Game Gauge >:)
 import {Spinner} from '../Partials/Spinner';
 import {ErrorPage} from '../Partials/Error';
+import {Favorites} from './Favorite';
 
 import './index.css';
 
@@ -85,10 +86,11 @@ export class Game extends React.Component {
                                     {/* DESKTOP */}
                                     <div className="d-none d-md-block">
                                         <Details
-                                            dor={Date(this.state.gameData.dor_details).substring(0,16)}
-                                            dev={this.state.gameData.developers.join(', ')}
-                                            plat={this.state.gameData.platforms.join(', ')}
-                                            genre={this.state.gameData.genre.join(', ')}
+                                            dor={this.state.gameData.dor_details}
+                                            dev={this.state.gameData.developers}
+                                            pub={this.state.gameData.publishers}
+                                            plat={this.state.gameData.platforms}
+                                            genre={this.state.gameData.genre}
                                         />
                                         <div className="details-summary">
                                             <p>{this.state.gameData.summary_details}</p>
@@ -119,6 +121,7 @@ export class Game extends React.Component {
                                         <Details
                                             dor={this.state.gameData.dor_details}
                                             dev={this.state.gameData.developers}
+                                            pub={this.state.gameData.publishers}
                                             plat={this.state.gameData.platforms}
                                             genre={this.state.gameData.genre}
                                         />
@@ -171,100 +174,19 @@ class Details extends React.Component {
     }
 
     render() {
+        const dateOld = this.props.dor.substring(0,10);
+        const m = parseInt(dateOld.substring(5,7));
+        const d = parseInt(dateOld.substring(8,10));
+        const y = dateOld.substring(0,4);
+        const dateNew = m + '/' + d + '/' + y; 
         return (
             <div className="quick-deets">
-                <h5>Released: <span className="detail-card-info">{this.props.dor}</span></h5>
-                <h5>Developer(s): <span className="detail-card-info">{this.props.dev}</span></h5>
-                <h5>Platform(s): <span className="detail-card-info">{this.props.plat}</span></h5>
-                <h5>Genre(s): <span className="detail-card-info">{this.props.genre}</span></h5>
+                <h5>Released: <span className="detail-card-info">{dateNew}</span></h5>
+                <h5>Developer(s): <span className="detail-card-info">{this.props.dev.join(', ')}</span></h5>
+                <h5>Publisher(s): <span className="detail-card-info">{this.props.pub.join(', ')}</span></h5>
+                <h5>Platform(s): <span className="detail-card-info">{this.props.plat.join(', ')}</span></h5>
+                <h5>Genre(s): <span className="detail-card-info">{this.props.genre.join(', ')}</span></h5>
             </div>
         );
-    }
-}
-
-// Favorites Component
-class Favorites extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            favorite: false,
-            favCount: 0
-        }
-
-        this.isFavorite = this.isFavorite.bind(this);
-        this.favCount = this.favCount.bind(this);
-        this.updateFavorite = this.updateFavorite.bind(this);
-    }
-
-    componentDidMount() {
-        this.favCount(this.props.gid);
-        this.isFavorite(this.props.gid);
-    }
-
-    isFavorite(gid) {
-        axios
-            .get(`${process.env.REACT_APP_BASE_URL}/game/isFavorite/${gid}`)
-            .then(result => {
-                if (result.data.isFavorite) {
-                    this.setState({
-                        favorite: true,
-                    });
-                } else {
-                    this.setState({
-                        favorite: false,
-                    });
-                }
-            })
-            .catch(err => {
-                this.setState({
-                    error: err
-                });
-            });
-    }
-
-    favCount(gid) {
-        axios
-            .get(`${process.env.REACT_APP_BASE_URL}/game/favCount/${gid}`)
-            .then(result => {
-                this.setState({
-                    favCount: result.data.favCount,
-                });
-            })
-            .catch(err => {
-                this.setState({
-                    error: err
-                });
-            });
-    }
-
-    updateFavorite(gid) {
-        axios
-            .post(`${process.env.REACT_APP_BASE_URL}/game/updateFavorite/${gid}`)
-            .then(result => {
-                this.isFavorite(gid);
-                this.favCount(gid);
-            })
-            .catch(err => {
-                this.setState({
-                    error: err
-                });
-            });
-    }
-
-    render() {
-        if (this.state.favorite) {
-            return (
-                <button onClick={() => this.updateFavorite(this.props.gid)} className="btn btn-secondary" style={{borderRadius: "20px"}}>
-                    <i className="fa fa-heart"></i> <span className="d-none d-md-inline">Favorited!</span>
-                </button>
-                
-            );
-        } else {
-            return (
-                <button onClick={() => this.updateFavorite(this.props.gid)} className="btn btn-danger" style={{borderRadius: "20px"}}>
-                    <i className="fa fa-heart"></i> {this.state.favCount} <span className="d-none d-md-inline">Favorite(s)</span>
-                </button>
-            );
-        }
     }
 }

@@ -121,7 +121,7 @@ module.exports = function (pool) {
      * POST Give a game a score (update score if u already did so)
      */
     router.post("/scoreGame", (req, res) => {
-
+        
     });
 
     return router;

@@ -6,18 +6,26 @@ const database = require("../database");
 
 module.exports = function (pool) {
     
-    router.get("/makeSearch", (req, res, next) => {
-        const search = req.query.search;
-        const filters = req.query.filters;
-
+    /**
+     * Make Search
+     */
+    router.get("/conductSearch/:s", (req, res) => {
+        let search = req.params.s;
         // Run query
-        pool.query(`SELECT * FROM Game;`, (err, data) => {
-            if (err) {
-                res.send(err);
-                throw err;
-            }
-            res.send(data);
-        });        
+        if (search === 'all') {
+            console.log('all search');
+            database.query(`SELECT gameID, title, cover_details FROM Game`, pool)
+            .then(result => {
+                console.log((result));
+                res.send(result);
+            }).catch(err => {console.error(err); res.send([])});
+        } else {
+            database.query(`SELECT gameID, title, cover_details FROM Game WHERE title='${search}'`, pool)
+            .then(result => {
+                console.log(result);
+                res.send(result);
+            }).catch(err => {console.error(err); res.send([])});
+        }
     });
 
     return router;
