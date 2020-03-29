@@ -17,12 +17,13 @@ import { Crawler } from './components/Crawler';
 import {Login, Register} from './components/Creds';
 
 
+
 class App extends React.Component {
 
     render() {
         return (
             <div>
-                <Navbar />
+                <Navbar/>
                 <Switch>
                     <Route path="/game/:g" component={Game} />
                     <Route path="/search" component={Search} />

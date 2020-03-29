@@ -21,7 +21,7 @@ export class Home extends React.Component {
 
     randomGame() {
         axios
-            .get(`${process.env.REACT_APP_BASE_URL}/home/randomGame`)
+            .get(`/home/randomGame`)
             .then(result => {
                 this.setState({
                     randomGame: result.data,
@@ -36,7 +36,7 @@ export class Home extends React.Component {
 
     mostFavorites() {
         axios
-            .get(`${process.env.REACT_APP_BASE_URL}/home/mostFavorites`)
+            .get(`/home/mostFavorites`)
             .then(result => {
                 this.setState({
                     mostFavorites: result.data,
@@ -51,7 +51,7 @@ export class Home extends React.Component {
 
     mostPopular() {
         axios
-            .get(`${process.env.REACT_APP_BASE_URL}/home/mostPopular`)
+            .get(`/home/mostPopular`)
             .then(result => {
                 this.setState({
                     mostPopular: result.data,

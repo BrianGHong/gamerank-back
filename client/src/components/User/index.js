@@ -1,79 +1,74 @@
 import axios from 'axios';
 import React from 'react';
-import {Alert} from '../Partials/Alert';
-import queryString from 'query-string';
 import './index.css';
 
 import {GameIcon} from './GameIcon';
 
-class Alerts extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const error = this.props.query["error"];
-        const success = this.props.query["success"];
-        
-        if (success) {
-            return <Alert type="success" message={success} />;
-        } 
-        if (error) {
-            return <Alert type="danger" message={error}/>;
-        }
-        return <span></span>;
-    }
-}
 
 export class User extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             favList: [],
-            username: 'USER'
+            username: ''
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getUsername();
         this.getFavList();
     }
 
     getUsername() {
-        axios
-            .get(`${process.env.REACT_APP_BASE_URL}/getSession`)
-            .then(result => {
-                this.setState({
-                    username: result.data.username,
-                });
-            })
-            .catch(err => {
-                console.error(err);
+        axios.request({
+            method: 'GET',
+            url: 'http://localhost:8000/getSession',
+            data: {}
+        })
+        .then(result => {
+            this.setState({
+                username: result.data.username
             });
+        })
+        .catch(err => {
+            this.setState({
+                username: ''
+            })
+            console.error(err);
+        });
     }
 
     getFavList() {
-        axios
-            .get(`${process.env.REACT_APP_BASE_URL}/user/getUserFavorites`)
-            .then(result => {
-                if (result.data) {
-                    this.setState({
-                        favList: result.data,
-                    });
-                } else {
-                    this.setState({
-                        favList: [],
-                    });
-                }
-            })
-            .catch(err => {
+        axios.request({
+            method: 'GET',
+            url: 'http://localhost:8000/user/getUserFavorites',
+            data: {}
+        })
+        .then(result => {
+            if (result.data) {
+                this.setState({
+                    favList: result.data,
+                });
+            } else {
                 this.setState({
                     favList: [],
                 });
+            }
+        })
+        .catch(err => {
+            this.setState({
+                favList: [],
             });
+        });
     }
 
     render() {
+        // Redirect user to login page if not logged in
+        // if (this.state.username == '') {
+        //     return <Redirect to='/login' />;
+        // }
+
+        // Render User Favorites
         let favList;
         if (this.state.favList.length === 0) {
             favList = <h5>No favorites :(</h5>
@@ -81,7 +76,7 @@ export class User extends React.Component {
             favList = (
                 <div id="gamecards" className="card-deck">
                     {this.state.favList.map((d, idx) => {
-                        return (<GameIcon title={d.title} gameurl={`${process.env.REACT_APP_BASE_URL}/game/${d.gameID}`} imgurl={d.cover_details} />);
+                        return (<GameIcon title={d.title} gameurl={`http://localhost:8000/game/${d.gameID}`} imgurl={d.cover_details} />);
                     })}
                 </div>
             );
@@ -89,14 +84,13 @@ export class User extends React.Component {
 
         return (
             <div className="container"><br/>
-                <Alerts query={queryString.parse(this.props.location.search)}/>
                 <h1>Hi, {this.state.username}! </h1>
                 <div className="col-12">
                     <div className="d-inline-flex">
                         <button className="btn btn-success" style={{marginRight: "10px"}} data-toggle="modal" data-target="#updateUserModal">
                             Update Username
                         </button>
-                        <form action={`${process.env.REACT_APP_BASE_URL}/user/logout`} method="post">
+                        <form action={`/user/logout`} method="post">
                             <input className="btn btn-warning" type="submit" value="Sign Out" />
                         </form>
                     </div>
@@ -114,7 +108,7 @@ export class User extends React.Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <form className="btn-group" action={`${process.env.REACT_APP_BASE_URL}/user/updateUsername`} method="post">
+                                <form className="btn-group" action={`/user/updateUsername`} method="post">
                                     <input className="form-control" type="text" name="username" placeholder="New Username"/>
                                     <input className="btn btn-success" type="submit" value="Submit"/>
                                 </form>

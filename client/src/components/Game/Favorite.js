@@ -22,7 +22,7 @@ export class Favorites extends React.Component {
 
     isFavorite(gid) {
         axios
-            .get(`${process.env.REACT_APP_BASE_URL}/game/isFavorite/${gid}`)
+            .get(`/game/isFavorite/${gid}`)
             .then(result => {
                 if (result.data.isFavorite) {
                     this.setState({
@@ -43,7 +43,7 @@ export class Favorites extends React.Component {
 
     favCount(gid) {
         axios
-            .get(`${process.env.REACT_APP_BASE_URL}/game/favCount/${gid}`)
+            .get(`/game/favCount/${gid}`)
             .then(result => {
                 this.setState({
                     favCount: result.data.favCount,
@@ -58,7 +58,7 @@ export class Favorites extends React.Component {
 
     updateFavorite(gid) {
         axios
-            .post(`${process.env.REACT_APP_BASE_URL}/game/updateFavorite/${gid}`)
+            .post(`/game/updateFavorite/${gid}`)
             .then(result => {
                 this.isFavorite(gid);
                 this.favCount(gid);

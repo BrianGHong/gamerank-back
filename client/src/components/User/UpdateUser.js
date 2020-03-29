@@ -10,11 +10,4 @@ export class UpdateUser extends React.Component {
             success: '',
         }
     }
-
-    render() {
-        return (
-            
-
-        );
-    }
 }
