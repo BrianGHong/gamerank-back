@@ -90,7 +90,7 @@ module.exports = function (pool) {
                     res.send({'error': 'No account with that email exists'});
                 }
             }).catch(err => {
-                res.send({'error': 'An unknown error has occurred. Please contact system administrator.'}); //JSON.stringify(err)});
+                res.send({'error': 'An unknown error has occurred. Please contact administrator.'}); //JSON.stringify(err)});
                 console.error(err);
             });
         }   
@@ -149,23 +149,24 @@ module.exports = function (pool) {
     router.post('/updateUsername', (req, res) => {
         const email = req.session.user;
         if (email) {
-            if (req.body.username.length > 4) {
-                database.query(`SELECT * FROM User WHERE username='${req.body.username}'`, pool)
+            if (req.body.newUsername.length > 4) {
+                database.query(`SELECT * FROM User WHERE username='${req.body.newUsername}'`, pool)
                 .then(result => {
                     if (result.length == 0) {
-                        database.query(`UPDATE User SET username='${req.body.username}' WHERE user_email='${req.session.user}'`, pool)
+                        database.query(`UPDATE User SET username='${req.body.newUsername}' WHERE user_email='${req.session.user}'`, pool)
                         .then(result => {
-                            res.redirect('/dashboard?success=Username updated!');
+                            res.send({'success': 'Username updated!'});
                         }).catch(err => console.error(err))
                     } else {
-                        res.redirect('/dashboard?error=That username has already been taken!');
+                        res.send({'error': 'That username has already been taken!'});
                     }
                 }).catch(err => console.error(err));
             } else {
-                res.redirect('/dashboard?error=Username must be longer than 5 characters');
+                res.send({'error': 'Username must be longer than 5 characters'});
             }
         } else {
-            res.redirect('/dashboard?error=An unknown error has occurred');
+            console.log('User is not logged in');
+            res.send({'error': 'Unknown error has occurred. Please contact administrator'});
         }
     });
 
