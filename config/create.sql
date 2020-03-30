@@ -58,7 +58,8 @@ CREATE TABLE IF NOT EXISTS comment (
     user_email VARCHAR(128),
     FOREIGN KEY(gameID) REFERENCES Game(gameID),
     FOREIGN KEY(user_email) REFERENCES User(user_email),
-    text TEXT NOT NULL
+    text TEXT NOT NULL,
+    time DATETIME NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS scores (

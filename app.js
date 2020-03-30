@@ -81,12 +81,14 @@ const homeRoutes = require("./routes/homeRoutes.js")(pool);
 const searchRoutes = require("./routes/searchRoutes.js")(pool);
 const userRoutes = require("./routes/userRoutes.js")(pool);
 const gameRoutes = require("./routes/gameRoutes.js")(pool);
+const scoreRoutes = require("./routes/scoreRoutes.js")(pool);
 
 // API Routes
 app.use("/home", homeRoutes);
 app.use("/search", searchRoutes);
 app.use("/game", gameRoutes);
 app.use("/user", userRoutes);
+app.use("/score", scoreRoutes);
 
 // Default Route
 app.get('/*', (req, res) => {

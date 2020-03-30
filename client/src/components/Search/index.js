@@ -46,11 +46,6 @@ export class Search extends React.Component {
                             title={d.title}
                             img={d.cover_details}
                             gameID={d.gameID}
-                            r1={20.01}
-                            r2={64.01}
-                            r3={53.01}
-                            r4={90.01}
-                            r5={76.01}
                             />);
                     })}
                 </div>

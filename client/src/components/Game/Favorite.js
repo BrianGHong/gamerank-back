@@ -20,55 +20,11 @@ export class Favorites extends React.Component {
         this.isFavorite(this.props.gid);
     }
 
-    isFavorite(gid) {
-        axios
-            .get(`/game/isFavorite/${gid}`)
-            .then(result => {
-                if (result.data.isFavorite) {
-                    this.setState({
-                        favorite: true,
-                    });
-                } else {
-                    this.setState({
-                        favorite: false,
-                    });
-                }
-            })
-            .catch(err => {
-                this.setState({
-                    error: err
-                });
-            });
-    }
+    
 
-    favCount(gid) {
-        axios
-            .get(`/game/favCount/${gid}`)
-            .then(result => {
-                this.setState({
-                    favCount: result.data.favCount,
-                });
-            })
-            .catch(err => {
-                this.setState({
-                    error: err
-                });
-            });
-    }
+    
 
-    updateFavorite(gid) {
-        axios
-            .post(`/game/updateFavorite/${gid}`)
-            .then(result => {
-                this.isFavorite(gid);
-                this.favCount(gid);
-            })
-            .catch(err => {
-                this.setState({
-                    error: err
-                });
-            });
-    }
+    
 
     render() {
         if (this.state.favorite) {

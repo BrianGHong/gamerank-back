@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {Gauge} from './QueryGauges';
 
@@ -6,7 +7,28 @@ import {Gauge} from './QueryGauges';
 export class GameCard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            gameScore: {}
+        };
+    }
+
+    componentDidMount() {
+        this.getGameScore(this.props.gameID);
+    }
+
+    // Get Game Aggregate Score
+    getGameScore = (gid) => {
+        axios.request({
+            method: 'GET',
+            url: `http://localhost:8000/score/getGameScore/${gid}`
+        })
+        .then(res => {
+            this.setState({
+                gameScore: res.data
+            });
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     render() {
@@ -20,7 +42,7 @@ export class GameCard extends React.Component {
 
         return (
             <div>
-                <a className="card gamecard" href={`/game/${this.props.gameID}`}>
+                <Link className="card gamecard" to={`/game/${this.props.gameID}`}>
                     <div className="row">
                         <div className="col-lg-2 col-md-3 col-4">
                             <img className="game-img" src={this.props.img} />
@@ -32,35 +54,35 @@ export class GameCard extends React.Component {
                                     <Gauge
                                         color={colors.c1}
                                         icon="fa fa-book"
-                                        rating={this.props.r1}
+                                        rating={this.state.gameScore.r1}
                                     />
                                 </div>
                                 <div data-tip="Gameplay Rating" className="col-lg-1 col-2">
                                     <Gauge
                                         color={colors.c2}
                                         icon="fa fa-gamepad"
-                                        rating={this.props.r2}
+                                        rating={this.state.gameScore.r2}
                                     />
                                 </div>
                                 <div data-tip="Art/Music Rating" className="col-lg-1 col-2">
                                     <Gauge
                                         color={colors.c3}
                                         icon="fa fa-paint-brush"
-                                        rating={this.props.r3}
+                                        rating={this.state.gameScore.r3}
                                     />
                                 </div>
                                 <div data-tip="Difficulty Rating" className="col-lg-1 col-2">
                                     <Gauge
                                         color={colors.c4}
                                         icon="fa fa-bolt"
-                                        rating={this.props.r4}
+                                        rating={this.state.gameScore.r4}
                                     />
                                 </div>
                                 <div data-tip="Value Rating" className="col-lg-1 col-2">
                                     <Gauge
                                         color={colors.c5}
                                         icon="fa fa-money"
-                                        rating={this.props.r5}
+                                        rating={this.state.gameScore.r5}
                                     />
                                 </div>
                             </div>
@@ -69,7 +91,7 @@ export class GameCard extends React.Component {
                             </div> */}
                         </div>
                     </div>
-                </a><br />
+                </Link><br />
             </div>
         );
     }

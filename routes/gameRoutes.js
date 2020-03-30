@@ -66,22 +66,26 @@ module.exports = function (pool) {
         const gid = req.params.gid;
         // ensure user is logged in
         if (email) {
-            console.log('User is logged in');
             database.query(`SELECT * FROM favorites WHERE user_email='${email}' AND gameID='${gid}'`, pool)
             .then(result => {
                 // If user has not favorited this game
                 if (result.length < 1) {
-                    console.log("FAVORITE");
-                    database.query(`INSERT INTO favorites VALUES (${gid}, '${email}')`, pool).catch(err => {console.error(err)});
+                    database.query(`INSERT INTO favorites VALUES (${gid}, '${email}')`, pool)
+                    .then(result => {
+                        res.send({'success': 'add'});
+                    })
+                    .catch(err => {console.error(err)});
                 // If user has ALREADY favorited this game
                 } else {
-                    console.log("UNFAVORITE");
-                    database.query(`DELETE FROM favorites WHERE user_email='${email}' AND gameID='${gid}'`, pool).catch(err => {console.error(err)});
+                    database.query(`DELETE FROM favorites WHERE user_email='${email}' AND gameID='${gid}'`, pool)
+                    .then(result => {
+                        res.send({'success': 'remove'});
+                    })
+                    .catch(err => {console.error(err)});
                 }
             }).catch(err => console.error(err));
         } else {
-            console.log('User is NOT logged in');
-            res.send({});
+            res.send({'error': 'Must be logged in to favorite'});
         }
     });
 
@@ -101,7 +105,7 @@ module.exports = function (pool) {
                 }
             }).catch(err => {console.error(err)});
         } else {
-            res.send({});
+            res.send({'error': 'User not logged in.'});
         }
     });
 
@@ -122,6 +126,56 @@ module.exports = function (pool) {
      */
     router.post("/scoreGame", (req, res) => {
         
+    });
+
+    /**
+     * GET Comments for a given game
+     */
+    router.get("/getComments/:gid", (req, res) => {
+        const gid = req.params.gid;
+        database.query(`SELECT * FROM comment NATURAL JOIN User WHERE gameID=${gid} ORDER BY time DESC;`, pool)
+        .then(result => {
+            if (result.length > 0) {
+                console.log('Final', result);
+                res.send(result);
+            } else {
+                console.log('Result length 0')
+                res.send([]);
+            }
+        })
+        .catch(err => {
+            res.send([]);
+        })
+    });
+
+    router.post("/postComment", (req, res) => {
+        const email = req.session.user;
+        const gid = req.body.gameID;
+        const message = req.body.comment;
+        const now = new Date().toISOString().slice(0, 10)+" "+new Date().toLocaleTimeString();
+        if (email) {
+            database.query('SELECT MAX(commentID) as maxID FROM comment', pool)
+            .then(result => {
+                const oldID = (result[0].maxID == 0) ? 0 : result[0].maxID;
+                const newID = oldID + 1;
+                if (message.length == 0) {
+                    res.send({'error': 'Comment field must not be left blank.'})
+                } else {
+                    database.query(`INSERT INTO comment VALUES (${newID}, ${gid}, '${email}', '${message}', '${now}')`, pool)
+                    .then(result => {
+                        res.send({'success': 'Comment posted!'});
+                    }).catch(err => {
+                        console.error(err);
+                        res.send({'error': 'Comment could not be posted'});
+                    });
+                }
+            }).catch(err => {
+                console.error(err);
+                res.send({'error': 'Unknown error has occurred.'});
+            })
+        } else {
+            res.send({'error': 'Must be logged in to comment'});
+        }
     });
 
     return router;
