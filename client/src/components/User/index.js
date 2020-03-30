@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react';
-import {Alert} from '../Partials/Alert';
 import queryString from 'query-string';
 import './index.css';
 
