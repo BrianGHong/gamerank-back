@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 import './index.css';
 
@@ -7,61 +8,64 @@ export class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            randomGame: {"gameID": 0},
-            mostFavorites: "Loading...",
-            mostPopular: "Loading..."
+            randomGameUrl: "/",
+            mostFavorites: {title: '...'},
+            mostPopular: {title: '...'}
         }
     }
 
     componentDidMount() {
-        this.randomGame();
-        this.mostFavorites();
-        this.mostPopular();
+        this.getRandomGame();
+        this.getMostFavorited();
+        this.getMostPopular();
     }
 
-    randomGame() {
-        axios
-            .get(`${process.env.REACT_APP_BASE_URL}/home/randomGame`)
-            .then(result => {
+    getRandomGame() {
+        axios.request({
+            method: 'GET',
+            url: process.env.REACT_APP_API_URI + '/home/randomGame'
+        })
+        .then(res => {
+            if (res.data.url) {
                 this.setState({
-                    randomGame: result.data,
+                    randomGameUrl: res.data.url
                 });
-            })
-            .catch(err => {
-                this.setState({
-                    error: err
-                });
-            });
+            }
+        }).catch(err => {
+            console.error(err);
+        });
     }
 
-    mostFavorites() {
-        axios
-            .get(`${process.env.REACT_APP_BASE_URL}/home/mostFavorites`)
-            .then(result => {
+    getMostFavorited() {
+        axios.request({
+            method: 'GET',
+            url: process.env.REACT_APP_API_URI + '/home/mostFavorites'
+        })
+        .then(res => {
+            if (res.data.gameID) {
                 this.setState({
-                    mostFavorites: result.data,
+                    mostFavorites: res.data,
                 });
-            })
-            .catch(err => {
-                this.setState({
-                    error: err
-                });
-            });
+            }
+        }).catch(err => {
+            console.error(err);
+        });
     }
 
-    mostPopular() {
-        axios
-            .get(`${process.env.REACT_APP_BASE_URL}/home/mostPopular`)
-            .then(result => {
+    getMostPopular() {
+        axios.request({
+            method: 'GET',
+            url: process.env.REACT_APP_API_URI + '/home/mostPopular'
+        })
+        .then(res => {
+            if (res.data.gameID) {
                 this.setState({
-                    mostPopular: result.data,
+                    mostPopular: res.data,
                 });
-            })
-            .catch(err => {
-                this.setState({
-                    error: err
-                });
-            });
+            }
+        }).catch(err => {
+            console.error(err);
+        });
     }
 
     render() {
@@ -77,7 +81,7 @@ export class Home extends React.Component {
                 }}>
                     <div className="container">
                         <h1 id="jumbo1" style={{fontWeight: "bold", textShadow: "4px 4px black"}}>So Many Games, So Little Time</h1>
-                        <a id="jumbo2" className="btn btn-success btn-game" href={`/game/${this.state.randomGame.gameID}`}>Take me to a game</a>
+                        <Link id="jumbo2" className="btn btn-success btn-game" to={`${this.state.randomGameUrl}`}>Take me to a game</Link>
                     </div>
                 </div>
                 <div className="container" style={{textAlign: "center"}}>
@@ -85,13 +89,13 @@ export class Home extends React.Component {
                         <div className="col-6">
                             <h1>Most Favorited 💖</h1>
                             <h3>
-                                <a href={`/game/${this.state.mostFavorites.gameID}`}>{this.state.mostFavorites.title}</a>
+                                <Link to={`/game/${this.state.mostFavorites.gameID}`}>{this.state.mostFavorites.title}</Link>
                             </h3>
                         </div>
                         <div className="col-6">
                             <h1>Most Popular 👪</h1>
                             <h3>
-                                <a href={`/game/${this.state.mostPopular.gameID}`}>{this.state.mostPopular.title}</a>
+                                <Link to={`/game/${this.state.mostPopular.gameID}`}>{this.state.mostPopular.title}</Link>
                             </h3>
                         </div>
                     </div>

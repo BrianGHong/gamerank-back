@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import ScrollToTop from 'react-router-scroll-top';
 import {usePromiseTracker} from 'react-promise-tracker';
 
 // Partials
@@ -17,12 +18,13 @@ import { Crawler } from './components/Crawler';
 import {Login, Register} from './components/Creds';
 
 
+
 class App extends React.Component {
 
     render() {
         return (
             <div>
-                <Navbar />
+                <Navbar/>
                 <Switch>
                     <Route path="/game/:g" component={Game} />
                     <Route path="/search" component={Search} />
@@ -40,6 +42,8 @@ class App extends React.Component {
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <ScrollToTop>
+            <App />
+        </ScrollToTop>
     </BrowserRouter>    
     , document.getElementById('root'));

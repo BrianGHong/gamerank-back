@@ -11,7 +11,13 @@ const app = express();
 var cors = require('cors');
 app.use(cors());
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
+
+app.use(bodyParser.json()); // Important
 app.use(cookieParser());
 
 // Define Session Obj
@@ -75,12 +81,14 @@ const homeRoutes = require("./routes/homeRoutes.js")(pool);
 const searchRoutes = require("./routes/searchRoutes.js")(pool);
 const userRoutes = require("./routes/userRoutes.js")(pool);
 const gameRoutes = require("./routes/gameRoutes.js")(pool);
+const scoreRoutes = require("./routes/scoreRoutes.js")(pool);
 
 // API Routes
 app.use("/home", homeRoutes);
 app.use("/search", searchRoutes);
 app.use("/game", gameRoutes);
 app.use("/user", userRoutes);
+app.use("/score", scoreRoutes);
 
 // Default Route
 app.get('/*', (req, res) => {

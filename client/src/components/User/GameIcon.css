@@ -14,22 +14,17 @@
     border-radius: 5px;
 }
 
-#u .card-deck {
-    display: flex;
-    flex-flow: row wrap;
-}
-
 @media (min-width: 0px) {
     #u .card {
-        max-width: 130px;
-    }
-    #u .gamecard {
-        padding: 0 2px;
+        max-width: 100px;
     }
 }
 @media (min-width: 400px) {
     #u .card {
-        max-width: 110px;
+        max-width: 120px;
+    }
+    #u .gamecard {
+        padding: 0 1px;
     }
 }
 @media (min-width: 700px) {
@@ -42,7 +37,7 @@
         max-width: 150px;
     }
     #u .gamecard {
-        padding: 0 5px;
+        padding: 0 2px;
     }
 }
 @media (min-width: 1200px) {
