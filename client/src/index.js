@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import ScrollToTop from 'react-router-scroll-top';
 import {usePromiseTracker} from 'react-promise-tracker';
 
 // Partials
@@ -41,6 +42,8 @@ class App extends React.Component {
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <ScrollToTop>
+            <App />
+        </ScrollToTop>
     </BrowserRouter>    
     , document.getElementById('root'));

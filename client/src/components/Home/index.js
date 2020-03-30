@@ -23,7 +23,7 @@ export class Home extends React.Component {
     getRandomGame() {
         axios.request({
             method: 'GET',
-            url: 'http://localhost:8000/home/randomGame'
+            url: process.env.REACT_APP_API_URI + '/home/randomGame'
         })
         .then(res => {
             if (res.data.url) {
@@ -39,7 +39,7 @@ export class Home extends React.Component {
     getMostFavorited() {
         axios.request({
             method: 'GET',
-            url: 'http://localhost:8000/home/mostFavorites'
+            url: process.env.REACT_APP_API_URI + '/home/mostFavorites'
         })
         .then(res => {
             if (res.data.gameID) {
@@ -55,7 +55,7 @@ export class Home extends React.Component {
     getMostPopular() {
         axios.request({
             method: 'GET',
-            url: 'http://localhost:8000/home/mostPopular'
+            url: process.env.REACT_APP_API_URI + '/home/mostPopular'
         })
         .then(res => {
             if (res.data.gameID) {

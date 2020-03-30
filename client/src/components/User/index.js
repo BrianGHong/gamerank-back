@@ -32,7 +32,7 @@ export class User extends React.Component {
     getUsername = () => {
         axios.request({
             method: 'GET',
-            url: 'http://localhost:8000/getSession',
+            url: process.env.REACT_APP_API_URI + '/getSession',
             data: {}
         })
         .then(result => {
@@ -54,7 +54,7 @@ export class User extends React.Component {
     getFavList = () => {
         axios.request({
             method: 'GET',
-            url: 'http://localhost:8000/user/getUserFavorites',
+            url: process.env.REACT_APP_API_URI + '/user/getUserFavorites',
             data: {}
         })
         .then(result => {
@@ -86,7 +86,7 @@ export class User extends React.Component {
 
         axios.request({
             method: 'POST',
-            url: 'http://localhost:8000/user/updateUsername',
+            url: process.env.REACT_APP_API_URI + '/user/updateUsername',
             data: data
         })
         .then(res => {
@@ -144,9 +144,9 @@ export class User extends React.Component {
             favList = <h5>No favorites :(</h5>
         } else {
             favList = (
-                <div id="gamecards" className="card-deck">
+                <div id="gamecards" style={{display: 'flex', flexFlow: 'row wrap'}}>
                     {this.state.favList.map((d, idx) => {
-                        return (<GameIcon title={d.title} gameurl={`http://localhost:8000/game/${d.gameID}`} imgurl={d.cover_details} />);
+                        return (<GameIcon title={d.title} gameurl={`/game/${d.gameID}`} imgurl={d.cover_details} />);
                     })}
                 </div>
             );

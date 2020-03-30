@@ -11,14 +11,16 @@ export class Navbar extends React.Component {
                 class: 'nav-item btn btn-outline-light',
                 link: '/login',
                 text: 'Login'
-            }
+            },
+            searchTerm: '',
+            goToSearchPage: false
         };
     }
     
     componentDidMount() {
         axios.request({
             method: 'GET',
-            url: 'http://localhost:8000/getSession',
+            url: process.env.REACT_APP_API_URI + '/getSession',
             data: {}
         })
         .then(result => {
@@ -45,6 +47,16 @@ export class Navbar extends React.Component {
         });
     }
 
+    handleChange = (e) => {
+        const val = e.target.value;
+        const name = e.target.name;
+        if (name === 's') {
+            this.setState({
+                searchTerm: val == '' ? 'all' : val
+            });
+        }
+    }
+
     render() {
         return (
             <div>
@@ -61,12 +73,10 @@ export class Navbar extends React.Component {
                         <div className="collapse navbar-collapse nav-item" id="navbarToggler">
                             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                                 <li>
-                                    <form className="form-inline" action="/search" method="get">
-                                        <div className="input-group" role="group">
-                                            <input name="s" className="form-control" style={{borderTopLeftRadius: "20px", borderBottomLeftRadius: "20px"}} type="search" placeholder="Search" aria-label="Search" />
-                                            <div className="input-group-append">
-                                                <button className="gg-item btn btn-outline-light" style={{borderTopRightRadius: "20px", borderBottomRightRadius: "20px"}} type="submit"><i className="fa fa-search"></i></button>
-                                            </div>
+                                    <form action="/search" method="get" className="form-inline input-group" role="group">
+                                        <input name="s" onChange={this.handleChange} value={this.state.searchTerm} className="form-control" style={{borderTopLeftRadius: "20px", borderBottomLeftRadius: "20px"}} type="search" placeholder="Search" aria-label="Search" />
+                                        <div className="input-group-append">
+                                            <button className="gg-item btn btn-outline-light" style={{borderTopRightRadius: "20px", borderBottomRightRadius: "20px"}} type="submit"><i className="fa fa-search"></i></button>
                                         </div>
                                     </form>
                                 </li>

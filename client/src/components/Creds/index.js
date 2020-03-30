@@ -34,7 +34,7 @@ export class Login extends React.Component {
 
         axios.request({
             method: 'POST',
-            url: 'http://localhost:8000/user/login',
+            url: process.env.REACT_APP_API_URI + '/user/login',
             data: data
         })
         .then(res => {
@@ -130,7 +130,7 @@ export class Register extends React.Component {
         };
         axios.request({
             method: 'POST',
-            url: 'http://localhost:8000/user/register',
+            url: process.env.REACT_APP_API_URI + '/user/register',
             data: data
         })
             .then(res => {

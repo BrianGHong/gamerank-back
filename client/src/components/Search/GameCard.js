@@ -20,7 +20,7 @@ export class GameCard extends React.Component {
     getGameScore = (gid) => {
         axios.request({
             method: 'GET',
-            url: `http://localhost:8000/score/getGameScore/${gid}`
+            url: `${process.env.REACT_APP_API_URI}/score/getGameScore/${gid}`
         })
         .then(res => {
             this.setState({

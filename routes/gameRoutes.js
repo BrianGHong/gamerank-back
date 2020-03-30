@@ -152,7 +152,7 @@ module.exports = function (pool) {
         const email = req.session.user;
         const gid = req.body.gameID;
         const message = req.body.comment;
-        const now = new Date().toISOString().slice(0, 10)+" "+new Date().toLocaleTimeString();
+        const now = new Date().toISOString().slice(0, 10)+" "+new Date().toTimeString();
         if (email) {
             database.query('SELECT MAX(commentID) as maxID FROM comment', pool)
             .then(result => {

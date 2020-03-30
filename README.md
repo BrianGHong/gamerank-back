@@ -8,14 +8,15 @@ A video game scoring system, a project to apply concepts learned regarding DB de
 - Run `npm run dev` in the root directory and `npm start` in the client directory
 - This will run the client on port `3000` and the server on port `8000`
     - use port `3000` solely for developing on the front end
-    - use port `8000` to develop server (node) functionality with a preexisting client build (`3000` and `8000` do not interact directly for the time being) 
+    - use port `8000` to develop server (node) functionality with a preexisting client build 
 
 ## Deployment
 
 *IMPORTANT*
 
-Before proceeding, ensure that you have built the react app in the client directory - this is because the node app on Heroku relies on the static files from `client/build` during production.
-- `cd client` then `npm run build`
+Before proceeding, ensure that you can build the react app in the client directory - if so, do the following before deploying:
+- change `.env` API URI route to whatever route the app is hosted on
+- ensure the environment variables are being used for nodejs
 
 All additions to the master branch will be deployed automatically for the time being.
 
@@ -24,6 +25,7 @@ If you want to test the development build locally, please run `heroku local web`
 ## Resources
 
 Resources used/referenced during development.
+- https://www.digitalocean.com/community/tutorials/getting-started-with-the-mern-stack#node-server-setup
 - https://www.codementor.io/@mayowa.a/how-to-build-a-simple-session-based-authentication-system-with-nodejs-from-scratch-6vn67mcy3
 - https://codeburst.io/node-js-mysql-and-promises-4c3be599909b
 - https://github.com/rohan-paul/material-ui-table-with-node-mongodb

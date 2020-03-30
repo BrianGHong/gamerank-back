@@ -3,7 +3,6 @@ import React from 'react';
 import {Gauges} from './Gauges'; // Game Gauge >:)
 import {Spinner} from '../Partials/Spinner';
 import {ErrorPage} from '../Partials/Error';
-import {Favorites} from './Favorite';
 import {Alert} from '../Partials/Alert';
 
 import './index.css';
@@ -59,7 +58,7 @@ export class Game extends React.Component {
         // Retrieve GameData
         axios.request({
             method: 'GET',
-            url: `http://localhost:8000/game/getgame/${gid}`
+            url: `${process.env.REACT_APP_API_URI}/game/getgame/${gid}`
         })
         .then(result => {
             this.setState({
@@ -78,7 +77,7 @@ export class Game extends React.Component {
     updateFavorite = (gid) => {
         axios.request({
             method: 'POST',
-            url: `http://localhost:8000/game/updateFavorite/${gid}`
+            url: `${process.env.REACT_APP_API_URI}/game/updateFavorite/${gid}`
         })
         .then(result => {
             if (result.data.success === 'add') {
@@ -123,7 +122,7 @@ export class Game extends React.Component {
     favCount = (gid) => {
         axios.request({
             method: 'GET',
-            url: `http://localhost:8000/game/favCount/${gid}`
+            url: `${process.env.REACT_APP_API_URI}/game/favCount/${gid}`
         })
         .then(result => {
             this.setState({
@@ -144,7 +143,7 @@ export class Game extends React.Component {
     isFavorite = (gid) => {
         axios.request({
             method: 'GET',
-            url: `http://localhost:8000/game/isFavorite/${gid}`
+            url: `${process.env.REACT_APP_API_URI}/game/isFavorite/${gid}`
         })
         .then(result => {
             if (result.data.isFavorite) {
@@ -179,7 +178,7 @@ export class Game extends React.Component {
     getComments = (gid) => {
         axios.request({
             method: 'GET',
-            url: `http://localhost:8000/game/getComments/${gid}`
+            url: `${process.env.REACT_APP_API_URI}/game/getComments/${gid}`
         })
         .then(res => {
             if (res.data.length > 0) {
@@ -196,7 +195,7 @@ export class Game extends React.Component {
     postComment = () => {
         axios.request({
             method: 'POST',
-            url: `http://localhost:8000/game/postComment`,
+            url: `${process.env.REACT_APP_API_URI}/game/postComment`,
             data: {
                 gameID: this.state.gameID,
                 comment: this.state.commentBody.replace(/'/g, "\\'")
@@ -235,7 +234,7 @@ export class Game extends React.Component {
     getGameScore = (gid) => {
         axios.request({
             method: 'GET',
-            url: `http://localhost:8000/score/getGameScore/${gid}`
+            url: `${process.env.REACT_APP_API_URI}/score/getGameScore/${gid}`
         })
         .then(res => {
             this.setState({
@@ -257,7 +256,7 @@ export class Game extends React.Component {
         }
         axios.request({
             method: 'POST',
-            url: 'http://localhost:8000/score/postGameScore',
+            url: `${process.env.REACT_APP_API_URI}/score/postGameScore`,
             data: data
         })
         .then(res => {
