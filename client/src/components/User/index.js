@@ -1,10 +1,31 @@
 import axios from 'axios';
 import React from 'react';
+import {Alert} from '../Partials/Alert';
+import queryString from 'query-string';
 import './index.css';
 
 import {GameIcon} from './GameIcon';
 import {Alert} from '../Partials/Alert';
 import {Spinner} from '../Partials/Spinner';
+
+class Alerts extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const error = this.props.query["error"];
+        const success = this.props.query["success"];
+        
+        if (success) {
+            return <Alert type="success" message={success} />;
+        } 
+        if (error) {
+            return <Alert type="danger" message={error}/>;
+        }
+        return <span></span>;
+    }
+}
 
 export class User extends React.Component {
     constructor(props) {

@@ -4,7 +4,6 @@ import {Gauges} from './Gauges'; // Game Gauge >:)
 import {Spinner} from '../Partials/Spinner';
 import {ErrorPage} from '../Partials/Error';
 import {Alert} from '../Partials/Alert';
-
 import './index.css';
 
 
@@ -52,6 +51,7 @@ export class Game extends React.Component {
         this.favCount(id);
         this.getComments(id);
         this.getGameScore(id);
+
     }
 
     gameData = (gid) => {
@@ -368,6 +368,7 @@ export class Game extends React.Component {
                                     <a className="btn btn-success" style={{borderRadius: "20px", margin: "2px 0 0 5px", color: "white"}} target="_blank" href={this.state.gameData.url_details}>
                                         <i className="fa fa-info-circle"></i> <span className="d-none d-sm-inline">More Info</span>
                                     </a>
+
                     
                                     {/* DETAILS */}
                                     {/* DESKTOP */}

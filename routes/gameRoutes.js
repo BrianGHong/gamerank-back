@@ -86,6 +86,7 @@ module.exports = function (pool) {
             }).catch(err => console.error(err));
         } else {
             res.send({'error': 'Must be logged in to favorite'});
+
         }
     });
 
@@ -121,12 +122,6 @@ module.exports = function (pool) {
         .catch(err => console.error(err));
     });
 
-    /**
-     * POST Give a game a score (update score if u already did so)
-     */
-    router.post("/scoreGame", (req, res) => {
-        
-    });
 
     /**
      * GET Comments for a given game

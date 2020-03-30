@@ -75,8 +75,8 @@ async function getBackground({ gameID }) {
             endpoint: 'screenshots',
             data: 'fields image_id; where game = ' + gameID + ';'
         });
-        console.log("BG ");
-        console.log(response);
+        // console.log("BG ");
+        // console.log(response);
         if (response.data.length == 0){
             throw "no matching background image data";
         }
@@ -222,11 +222,16 @@ async function getCompanies({ gameID }) {
             data: 'where id=(' + companyIDs.toString() + '); fields name;'
         });
         for (var i in names.data) {
-            if (involvement.data[i].developer) {
-                companies.developers.push(names.data[i].name);
-            }
-            if (involvement.data[i].publisher) {
-                companies.publishers.push(names.data[i].name);
+            for (var j in involvement.data){
+                if (names.data[i].id == involvement.data[j].company){
+                    if (involvement.data[j].developer) {
+                        companies.developers.push(names.data[i].name);
+                    }
+                    if (involvement.data[j].publisher) {
+                        companies.publishers.push(names.data[i].name);
+                    }
+                    break;
+                }
             }
         }
         return companies;
@@ -260,7 +265,7 @@ export async function getTheRest({ gameID }) {
         gameData.developers = companies.developers;
         gameData.publishers = companies.publishers;
         delete gameData.companies
-        console.log(gameData);
+        // console.log(gameData);
         return gameData;
     }
     catch (err) {
