@@ -91,7 +91,7 @@ export class GameCard extends React.Component {
                             </div> */}
                         </div>
                     </div>
-                </a><br />
+                </Link><br />
             </div>
         );
     }
