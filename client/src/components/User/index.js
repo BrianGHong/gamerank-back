@@ -221,7 +221,7 @@ export class User extends React.Component {
                                     </button>
                                 </div>
                                 <div className="modal-body btn-group">
-                                    <form action="http://localhost:8000/user/logout" method="post">
+                                    <form action="/user/logout" method="post">
                                         <input className="btn btn-danger" type="submit" value="Logout" style={{marginRight: "4px"}}/>
                                         <button type="button" className="btn btn-primary" data-dismiss="modal" aria-label="Close">Nevermind</button>
                                     </form>
