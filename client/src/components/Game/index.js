@@ -11,7 +11,10 @@ export class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true,
+            loading: {
+                gameData: true,
+                gameScore: true,
+            },
             gameID: 0,
             gameData: {},
             error: {},
@@ -46,12 +49,11 @@ export class Game extends React.Component {
         this.setState({
             gameID: id
         });
+        this.getGameScore(id);
         this.gameData(id);
         this.isFavorite(id);
         this.favCount(id);
         this.getComments(id);
-        this.getGameScore(id);
-
     }
 
     gameData = (gid) => {
@@ -63,7 +65,9 @@ export class Game extends React.Component {
         .then(result => {
             this.setState({
                 gameData: result.data,
-                loading: false
+                loading: {
+                    gameData: false
+                }
             });
         })
         .catch(err => {
@@ -238,10 +242,19 @@ export class Game extends React.Component {
         })
         .then(res => {
             this.setState({
-                gameScore: res.data
+                gameScore: res.data,
+                loading: {
+                    gameScore: false
+                }
             });
         }).catch(err => {
             console.log(err);
+            this.setState({
+                alert: {
+                    type: 'danger',
+                    message: 'An unknown error has occurred'
+                }
+            })
         });
     }
 
@@ -333,7 +346,7 @@ export class Game extends React.Component {
         }
 
         let result;
-        if (this.state.loading) {
+        if (this.state.loading.gameData || this.state.loading.gameScore) {
             result = <Spinner />;
         }
         else {
