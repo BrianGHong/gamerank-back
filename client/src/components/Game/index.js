@@ -34,7 +34,14 @@ export class Game extends React.Component {
             commentAlert: {},
 
             // Game score data
-            gameScore: {},
+            gameScore: {
+                r1: 0, // r1-r5 defaults
+                r2: 0,
+                r3: 0,
+                r4: 0,
+                r5: 0,
+                users: 0
+            },
             scoreAlert: {},
             r1: 0, // r1-r5 is what gets submitted
             r2: 0,
