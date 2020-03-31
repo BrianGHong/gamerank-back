@@ -414,11 +414,11 @@ export class Game extends React.Component {
                                 {/* MOBILE */}
                                 <div className="container row d-block d-md-none"><br/>
                                     <Gauges 
-                                        r1={this.state.gameScore.r1}
-                                        r2={this.state.gameScore.r2}
-                                        r3={this.state.gameScore.r3}
-                                        r4={this.state.gameScore.r4}
-                                        r5={this.state.gameScore.r5}
+                                        r1={this.state.gameScore.r1.toFixed(2)}
+                                        r2={this.state.gameScore.r2.toFixed(2)}
+                                        r3={this.state.gameScore.r3.toFixed(2)}
+                                        r4={this.state.gameScore.r4.toFixed(2)}
+                                        r5={this.state.gameScore.r5.toFixed(2)}
                                     />
                                     <ul className="nav nav-tabs">
                                         <li className="nav-item">
@@ -448,11 +448,11 @@ export class Game extends React.Component {
                         <div className="container">
                             <span className="d-md-inline d-none">
                                 <Gauges 
-                                    r1={this.state.gameScore.r1}
-                                    r2={this.state.gameScore.r2}
-                                    r3={this.state.gameScore.r3}
-                                    r4={this.state.gameScore.r4}
-                                    r5={this.state.gameScore.r5}
+                                    r1={this.state.gameScore.r1.toFixed(2)}
+                                    r2={this.state.gameScore.r2.toFixed(2)}
+                                    r3={this.state.gameScore.r3.toFixed(2)}
+                                    r4={this.state.gameScore.r4.toFixed(2)}
+                                    r5={this.state.gameScore.r5.toFixed(2)}
                                 />
                             </span>
                             <div style={{textAlign: "center"}}>
