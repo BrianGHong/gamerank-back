@@ -54,35 +54,35 @@ export class GameCard extends React.Component {
                                     <Gauge
                                         color={colors.c1}
                                         icon="fa fa-book"
-                                        rating={this.state.gameScore.r1}
+                                        rating={this.state.gameScore.r1.toFixed(2)}
                                     />
                                 </div>
                                 <div data-tip="Gameplay Rating" className="col-lg-1 col-2">
                                     <Gauge
                                         color={colors.c2}
                                         icon="fa fa-gamepad"
-                                        rating={this.state.gameScore.r2}
+                                        rating={this.state.gameScore.r2.toFixed(2)}
                                     />
                                 </div>
                                 <div data-tip="Art/Music Rating" className="col-lg-1 col-2">
                                     <Gauge
                                         color={colors.c3}
                                         icon="fa fa-paint-brush"
-                                        rating={this.state.gameScore.r3}
+                                        rating={this.state.gameScore.r3.toFixed(2)}
                                     />
                                 </div>
                                 <div data-tip="Difficulty Rating" className="col-lg-1 col-2">
                                     <Gauge
                                         color={colors.c4}
                                         icon="fa fa-bolt"
-                                        rating={this.state.gameScore.r4}
+                                        rating={this.state.gameScore.r4.toFixed(2)}
                                     />
                                 </div>
                                 <div data-tip="Value Rating" className="col-lg-1 col-2">
                                     <Gauge
                                         color={colors.c5}
                                         icon="fa fa-money"
-                                        rating={this.state.gameScore.r5}
+                                        rating={this.state.gameScore.r5.toFixed(2)}
                                     />
                                 </div>
                             </div>
