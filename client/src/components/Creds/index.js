@@ -105,7 +105,7 @@ export class Login extends React.Component {
                     <input onChange={this.handleChange} value={this.state.password} className="form-control" type="password" name="password" placeholder="Password" style={{margin: "4px"}}/>
                     <input onClick={this.loginUser} className="btn btn-success" type="submit" value="Login" /><br/>
                     <p><Link to='/register'>Register here</Link></p>
-                    <p>Having trouble logging on? Make sure you are on the <a href="https://gamegauge.herokuapp.com">SECURE SITE</a>!</p>
+            {/*<p>Having trouble logging on? Make sure you are on the <a href="https://gamegauge.herokuapp.com">SECURE SITE</a>!</p>*/}
                 </div>
             </div>
         );
