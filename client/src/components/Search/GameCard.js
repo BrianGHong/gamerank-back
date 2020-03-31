@@ -8,7 +8,13 @@ export class GameCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            gameScore: {}
+            gameScore: {
+                r1: 0,
+                r2: 0,
+                r3: 0,
+                r4: 0,
+                r5: 0,
+            }
         };
     }
 
