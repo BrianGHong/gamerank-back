@@ -241,12 +241,29 @@ export class Game extends React.Component {
             url: `${process.env.REACT_APP_API_URI}/score/getGameScore/${gid}`
         })
         .then(res => {
-            this.setState({
-                gameScore: res.data,
-                loading: {
-                    gameScore: false
-                }
-            });
+            if (res.data.r1) {
+                this.setState({
+                    gameScore: res.data,
+                    loading: {
+                        gameScore: false
+                    }
+                });
+            } else {
+                this.setState({
+                    gameScore: {
+                        r1: 0,
+                        r2: 0,
+                        r3: 0,
+                        r4: 0,
+                        r5: 0,
+                        users: 0
+                    },
+                    loading: {
+                        gameScore: false
+                    }
+                });
+            }
+            
         }).catch(err => {
             console.log(err);
             this.setState({

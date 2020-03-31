@@ -37,6 +37,14 @@ module.exports = function (pool) {
             }
             res.send(scoreObj);
         }).catch(err => {
+            res.send({
+                r1: 0.0,
+                r2: 0.0,
+                r3: 0.0,
+                r4: 0.0,
+                r5: 0.0,
+                users: 0
+            });
             console.error(err);
         });
     });
