@@ -346,58 +346,90 @@ export class Game extends React.Component {
         }
 
         let result;
-        if (this.state.loading.gameData || this.state.loading.gameScore) {
-            result = <Spinner />;
-        }
-        else {
-            result = (!this.state.gameData.title) ? <ErrorPage status="404" message="We could not find that game."/> : (
-                <div id="top">
-                    <div style={{
-                        backgroundImage: 'url(' + this.state.gameData.bg_img_details + ')',
-                        backgroundRepeat: "no-repeat",
-                        backgroundAttachment: "fixed",
-                        backgroundSize: "cover"
-                        }}>
-                        <div className="container detail-card"><br/>
-                            <Alert type={this.state.alert.type} message={this.state.alert.message}/>
-                            <div className="row">
-                                <div className="col-xl-3 col-lg-4 col-4">
-                                    {/* THUMBNAIL */}
-                                    <img className="trailer-img" src={this.state.gameData.cover_details} />
-                                </div>
-                                <div className="col-xl-9 col-lg-8 col-8">
-                                    <h1 className="game-title">{this.state.gameData.title}</h1>
-                                    
-                                    {/* FAVORITE */}
-                                    <button onClick={() => this.updateFavorite(this.state.gameID)} className={this.state.favStyle.class} style={{borderRadius: "20px"}}>
-                                        <i className="fa fa-heart"></i> <span className="d-none d-md-inline">{this.state.favStyle.text}</span>
-                                    </button>
+        if (!this.state.loading.gameData && !this.state.loading.gameScore) {
+            if (this.state.gameData.dor_details) {
+                result = (
+                    <div id="top">
+                        <div style={{
+                            backgroundImage: 'url(' + this.state.gameData.bg_img_details + ')',
+                            backgroundRepeat: "no-repeat",
+                            backgroundAttachment: "fixed",
+                            backgroundSize: "cover"
+                            }}>
+                            <div className="container detail-card"><br/>
+                                <Alert type={this.state.alert.type} message={this.state.alert.message}/>
+                                <div className="row">
+                                    <div className="col-xl-3 col-lg-4 col-4">
+                                        {/* THUMBNAIL */}
+                                        <img className="trailer-img" src={this.state.gameData.cover_details} />
+                                    </div>
+                                    <div className="col-xl-9 col-lg-8 col-8">
+                                        <h1 className="game-title">{this.state.gameData.title}</h1>
+                                        
+                                        {/* FAVORITE */}
+                                        <button onClick={() => this.updateFavorite(this.state.gameID)} className={this.state.favStyle.class} style={{borderRadius: "20px"}}>
+                                            <i className="fa fa-heart"></i> <span className="d-none d-md-inline">{this.state.favStyle.text}</span>
+                                        </button>
 
-                                    {/* Watch Trailer */}
-                                    <a className="btn btn-primary" style={{borderRadius: "20px", marginLeft: "5px", color: "white"}} target="_blank" href={this.state.gameData.trailer_details}>
-                                        <i className="fa fa-film"></i> <span className="d-none d-sm-inline">Trailer</span>
-                                    </a>
-                                    {/* Read More */}
-                                    <a className="btn btn-success" style={{borderRadius: "20px", margin: "2px 0 0 5px", color: "white"}} target="_blank" href={this.state.gameData.url_details}>
-                                        <i className="fa fa-info-circle"></i> <span className="d-none d-sm-inline">More Info</span>
-                                    </a>
+                                        {/* Watch Trailer */}
+                                        <a className="btn btn-primary" style={{borderRadius: "20px", marginLeft: "5px", color: "white"}} target="_blank" href={this.state.gameData.trailer_details}>
+                                            <i className="fa fa-film"></i> <span className="d-none d-sm-inline">Trailer</span>
+                                        </a>
+                                        {/* Read More */}
+                                        <a className="btn btn-success" style={{borderRadius: "20px", margin: "2px 0 0 5px", color: "white"}} target="_blank" href={this.state.gameData.url_details}>
+                                            <i className="fa fa-info-circle"></i> <span className="d-none d-sm-inline">More Info</span>
+                                        </a>
 
-                    
-                                    {/* DETAILS */}
-                                    {/* DESKTOP */}
-                                    <div className="d-none d-md-block">
-                                        <Details
-                                            gameData={this.state.gameData}
-                                        />
-                                        <div className="details-summary">
-                                            <p>{this.state.gameData.summary_details}</p>
+                        
+                                        {/* DETAILS */}
+                                        {/* DESKTOP */}
+                                        <div className="d-none d-md-block">
+                                            <Details
+                                                gameData={this.state.gameData}
+                                            />
+                                            <div className="details-summary">
+                                                <p>{this.state.gameData.summary_details}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                {/* DETAILS */}
+                                {/* MOBILE */}
+                                <div className="container row d-block d-md-none"><br/>
+                                    <Gauges 
+                                        r1={this.state.gameScore.r1}
+                                        r2={this.state.gameScore.r2}
+                                        r3={this.state.gameScore.r3}
+                                        r4={this.state.gameScore.r4}
+                                        r5={this.state.gameScore.r5}
+                                    />
+                                    <ul className="nav nav-tabs">
+                                        <li className="nav-item">
+                                            <a className="nav-link active" data-toggle="tab" href="#deet">Details</a>
+                                        </li>    
+                                        <li className="nav-item">
+                                            <a className="nav-link" data-toggle="tab" href="#summ">Summary</a>
+                                        </li>
+                                    </ul>
+                                    <div className="tab-content clearfix">
+                                        <div id="deet" className="tab-pane active">
+                                            <Details
+                                                gameData={this.state.gameData}
+                                            />
+                                        </div>
+                                        <div id="summ" className="tab-pane">
+                                            <div className="details-summary">
+                                                <p>{this.state.gameData.summary_details}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
                             </div>
-                            {/* DETAILS */}
-                            {/* MOBILE */}
-                            <div className="container row d-block d-md-none"><br/>
+                        </div>
+                        
+                        <div className="container">
+                            <span className="d-md-inline d-none">
                                 <Gauges 
                                     r1={this.state.gameScore.r1}
                                     r2={this.state.gameScore.r2}
@@ -405,100 +437,76 @@ export class Game extends React.Component {
                                     r4={this.state.gameScore.r4}
                                     r5={this.state.gameScore.r5}
                                 />
-                                <ul className="nav nav-tabs">
-                                    <li className="nav-item">
-                                        <a className="nav-link active" data-toggle="tab" href="#deet">Details</a>
-                                    </li>    
-                                    <li className="nav-item">
-                                        <a className="nav-link" data-toggle="tab" href="#summ">Summary</a>
-                                    </li>
-                                </ul>
-                                <div className="tab-content clearfix">
-                                    <div id="deet" className="tab-pane active">
-                                        <Details
-                                            gameData={this.state.gameData}
-                                        />
-                                    </div>
-                                    <div id="summ" className="tab-pane">
-                                        <div className="details-summary">
-                                            <p>{this.state.gameData.summary_details}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            </span>
+                            <div style={{textAlign: "center"}}>
+                                <button data-toggle="modal" data-target="#submitScoreModal" className="btn btn-success rating-button btn-lg">Leave a Score!</button><br/>
+                                <p style={{color: "gray", fontStyle:"italic"}}>{this.state.gameScore.users} users</p>
+                            </div><br/>
+                        
+                            <h1>Comments</h1>
+                            <hr style={{background:"white"}} />
+                            <Alert type={this.state.commentAlert.type} message={this.state.commentAlert.message} />
+                            <div className="form-group">
+                                <textarea onChange={this.handleChange} value={this.state.commentBody} name="commentBody" className="form-control" placeholder="Enter comment here..."></textarea><br />
+                                <input onClick={this.postComment} className="btn btn-success" type="submit" />
                             </div>
                             <br/>
-                        </div>
-                    </div>
-                    
-                    <div className="container">
-                        <span className="d-md-inline d-none">
-                            <Gauges 
-                                r1={this.state.gameScore.r1}
-                                r2={this.state.gameScore.r2}
-                                r3={this.state.gameScore.r3}
-                                r4={this.state.gameScore.r4}
-                                r5={this.state.gameScore.r5}
-                            />
-                        </span>
-                        <div style={{textAlign: "center"}}>
-                            <button data-toggle="modal" data-target="#submitScoreModal" className="btn btn-success rating-button btn-lg">Leave a Score!</button><br/>
-                            <p style={{color: "gray", fontStyle:"italic"}}>{this.state.gameScore.users} users</p>
-                        </div><br/>
-                    
-                        <h1>Comments</h1>
-                        <hr style={{background:"white"}} />
-                        <Alert type={this.state.commentAlert.type} message={this.state.commentAlert.message} />
-                        <div className="form-group">
-                            <textarea onChange={this.handleChange} value={this.state.commentBody} name="commentBody" className="form-control" placeholder="Enter comment here..."></textarea><br />
-                            <input onClick={this.postComment} className="btn btn-success" type="submit" />
-                        </div>
-                        <br/>
-                        
-                        {this.state.comments.map((d, idx) => {
-                            return (
-                                <div className="card" style={{marginBottom: "10px"}}>
-                                    <div className="card-body">
-                                        <h4>{d.username}</h4>
-                                        <p>{d.text}</p>
-                                        <span style={{color: "gray"}}>
-                                            {(new Date(d.time)).toLocaleDateString()} - 
-                                            {(new Date(d.time)).toLocaleTimeString()}
-                                        </span>
+                            
+                            {this.state.comments.map((d, idx) => {
+                                return (
+                                    <div className="card" style={{marginBottom: "10px"}}>
+                                        <div className="card-body">
+                                            <h4>{d.username}</h4>
+                                            <p>{d.text}</p>
+                                            <span style={{color: "gray"}}>
+                                                {(new Date(d.time)).toLocaleDateString()} - 
+                                                {(new Date(d.time)).toLocaleTimeString()}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })}
-                    </div>
+                                );
+                            })}
+                        </div>
 
-                    {/* Submit Score Modal */}
-                    <div id="submitScoreModal" className="modal fade" tabindex="-1" role="dialog" aria-labelledby="submitScoreModal" aria-hidden="true">
-                        <div className="modal-dialog" role="document">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title">Rate this game!</h5>
-                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div className="modal-body slidecontainer">
-                                    <Alert type={this.state.scoreAlert.type} message={this.state.scoreAlert.message} />
-                                    <h4 style={{color: colors.c1}}><i class="fa fa-book"></i> Story: {this.state.r1}%</h4>
-                                    <input class="slider" style={{background: colors.c1}} name="r1" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r1}/>
-                                    <h4 style={{color: colors.c2}}><i class="fa fa-gamepad"></i> Gameplay: {this.state.r2}%</h4>
-                                    <input class="slider" style={{background: colors.c2}} name="r2" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r2}/>
-                                    <h4 style={{color: colors.c3}}><i class="fa fa-paint-brush"></i> Art/Music: {this.state.r3}%</h4>
-                                    <input class="slider" style={{background: colors.c3}} name="r3" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r3}/>
-                                    <h4 style={{color: colors.c4}}><i class="fa fa-bolt"></i> Difficulty: {this.state.r4}%</h4>
-                                    <input class="slider" style={{background: colors.c4}} name="r4" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r4}/>
-                                    <h4 style={{color: colors.c5}}><i class="fa fa-money"></i> Worth it? {this.state.r5}%</h4>
-                                    <input class="slider" style={{background: colors.c5}} name="r5" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r5}/>
-                                    <button onClick={this.postGameScore} className="btn btn-success">Submit</button>
+                        {/* Submit Score Modal */}
+                        <div id="submitScoreModal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="submitScoreModal" aria-hidden="true">
+                            <div className="modal-dialog" role="document">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title">Rate this game!</h5>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div className="modal-body slidecontainer">
+                                        <Alert type={this.state.scoreAlert.type} message={this.state.scoreAlert.message} />
+                                        <h4 style={{color: colors.c1}}><i className="fa fa-book"></i> Story: {this.state.r1}%</h4>
+                                        <input className="slider" style={{background: colors.c1}} name="r1" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r1}/>
+                                        <h4 style={{color: colors.c2}}><i className="fa fa-gamepad"></i> Gameplay: {this.state.r2}%</h4>
+                                        <input className="slider" style={{background: colors.c2}} name="r2" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r2}/>
+                                        <h4 style={{color: colors.c3}}><i className="fa fa-paint-brush"></i> Art/Music: {this.state.r3}%</h4>
+                                        <input className="slider" style={{background: colors.c3}} name="r3" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r3}/>
+                                        <h4 style={{color: colors.c4}}><i className="fa fa-bolt"></i> Difficulty: {this.state.r4}%</h4>
+                                        <input className="slider" style={{background: colors.c4}} name="r4" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r4}/>
+                                        <h4 style={{color: colors.c5}}><i className="fa fa-money"></i> Worth it? {this.state.r5}%</h4>
+                                        <input className="slider" style={{background: colors.c5}} name="r5" type="range" min="1" max="100" onChange={this.handleChange} value={this.state.r5}/>
+                                        <button onClick={this.postGameScore} className="btn btn-success">Submit</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            );
+                );
+            } else {
+                if (this.state.gameData.error404) {
+                    result = <ErrorPage status="404" message="Game not found"/>
+                } else {
+                    result = <span></span>
+                }
+            }
+        } else {
+            result = <Spinner/>;
+            // result = <ErrorPage status='404' message='Game not found'/>
         }
         return result;
     }
