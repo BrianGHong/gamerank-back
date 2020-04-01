@@ -96,7 +96,7 @@ export class Game extends React.Component {
                 this.setState({
                     favorite: true,
                     favStyle: {
-                        text: `Favorited!`,
+                        text: ` Favorited!`,
                         class: 'btn btn-secondary'
                     }
                 });
@@ -105,7 +105,7 @@ export class Game extends React.Component {
                 this.setState({
                     favorite: false,
                     favStyle: {
-                        text: `${this.state.favCount} Favorites`,
+                        text: `Favorite(s)`,
                         class: 'btn btn-danger'
                     }
                 });
@@ -157,19 +157,20 @@ export class Game extends React.Component {
             url: `${process.env.REACT_APP_API_URI}/game/isFavorite/${gid}`
         })
         .then(result => {
+            this.favCount(gid);
             if (result.data.isFavorite) {
                 this.setState({
                     favorite: true,
                     favStyle: {
                         class: 'btn btn-secondary',
-                        text: 'Favorited!'
+                        text: ' Favorited!'
                     }
                 });
             } else {
                 this.setState({
                     favorite: false,
                     favStyle: {
-                        text: `${this.state.favCount} Favorites`,
+                        text: `Favorite(s)`,
                         class: 'btn btn-danger'
                     }
                 });
@@ -270,7 +271,6 @@ export class Game extends React.Component {
                     }
                 });
             }
-            
         }).catch(err => {
             console.log(err);
             this.setState({
@@ -282,6 +282,7 @@ export class Game extends React.Component {
         });
     }
 
+    // User submits/updates game score
     postGameScore = () => {
         const data = {
             r1: this.state.r1,
@@ -392,7 +393,7 @@ export class Game extends React.Component {
                                         
                                         {/* FAVORITE */}
                                         <button onClick={() => this.updateFavorite(this.state.gameID)} className={this.state.favStyle.class} style={{borderRadius: "20px"}}>
-                                            <i className="fa fa-heart"></i> <span className="d-none d-md-inline">{this.state.favStyle.text}</span>
+                                            <i className="fa fa-heart"></i> <span className="d-none d-md-inline">{!this.state.favorite ? this.state.favCount : ''} {this.state.favStyle.text}</span>
                                         </button>
 
                                         {/* Watch Trailer */}
@@ -525,12 +526,11 @@ export class Game extends React.Component {
                 if (this.state.gameData.error404) {
                     result = <ErrorPage status="404" message="Game not found"/>
                 } else {
-                    result = <span></span>
+                    result = <Spinner/>
                 }
             }
         } else {
             result = <Spinner/>;
-            // result = <ErrorPage status='404' message='Game not found'/>
         }
         return result;
     }
