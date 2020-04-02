@@ -24,10 +24,11 @@ app.use(cookieParser());
 app.use(session({
     key: 'user_sid',
     secret: 'shhh',
-    resave: false,
+    resave: true,
     saveUninitialized: false,
+    rolling: true,
     cookie: {
-        expires: 1200000
+        expires: 3600000
     }
 }));
 
