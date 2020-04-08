@@ -13,6 +13,7 @@ export class Navbar extends React.Component {
                 text: 'Login'
             },
             searchTerm: '',
+            currentFilter: '',
             goToSearchPage: false
         };
     }
@@ -20,8 +21,7 @@ export class Navbar extends React.Component {
     componentDidMount() {
         axios.request({
             method: 'GET',
-            url: process.env.REACT_APP_API_URI + '/getSession',
-            data: {}
+            url: process.env.REACT_APP_API_URI + '/getSession'
         })
         .then(result => {
             if (result.data.username) {
@@ -47,18 +47,33 @@ export class Navbar extends React.Component {
         });
     }
 
+    conductSearch = (e) => {
+        e.preventDefault();
+
+        const s = this.state.searchTerm;
+        const f = this.state.currentFilter;
+        const {doSearch} = this.props;
+        doSearch(s,f);
+    }
+
     handleChange = (e) => {
         const val = e.target.value;
         const name = e.target.name;
         if (name === 's') {
             this.setState({
-                searchTerm: val == '' ? 'all' : val
+                searchTerm: val
             });
         }
     }
 
+    handleFilterChange = (e) => {
+        this.setState({
+            currentFilter: e.target.value
+        });
+    }
+
     render() {
-        return (
+        let toRender = (
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark">
                     <div className="container-fluid inline-block">
@@ -73,12 +88,14 @@ export class Navbar extends React.Component {
                         <div className="collapse navbar-collapse nav-item" id="navbarToggler">
                             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                                 <li>
-                                    <form action="/search" method="get" className="form-inline input-group" role="group">
+                                    <div className="form-inline input-group" role="group">
                                         <input name="s" onChange={this.handleChange} value={this.state.searchTerm} className="form-control" style={{borderTopLeftRadius: "20px", borderBottomLeftRadius: "20px"}} type="search" placeholder="Search" aria-label="Search" />
+                                        <input hidden name="f" value={this.state.currentFilter} onChange={this.handleFilterChange}/>
                                         <div className="input-group-append">
-                                            <button className="gg-item btn btn-outline-light" style={{borderTopRightRadius: "20px", borderBottomRightRadius: "20px"}} type="submit"><i className="fa fa-search"></i></button>
+                                            <button className="gg-item btn btn-outline-light" style={{}} type="button" data-toggle="modal" data-target="#filterModal"><i className="fa fa-list"></i></button>
+                                            <button type="submit" onClick={this.conductSearch} className="gg-item btn btn-outline-light" style={{borderTopRightRadius: "20px", borderBottomRightRadius: "20px"}}><i className="fa fa-search"></i></button>
                                         </div>
-                                    </form>
+                                    </div>
                                 </li>
                             </ul>
                             <Link className={this.state.icon.class} style={{marginTop: "2px", borderRadius: "20px"}} to={this.state.icon.link}>
@@ -87,7 +104,42 @@ export class Navbar extends React.Component {
                         </div>
                     </div>
                 </nav>
+                {/* Filter Modal */}
+                <div className="modal fade" id="filterModal" tabIndex="-1" role="dialog" aria-labelledby="filterModal" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h3 className="modal-title" id="filterModal">Search by</h3>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" value="title" 
+                                        checked={this.state.currentFilter === 'title'}
+                                        onChange={this.handleFilterChange}/>
+                                    <label className="form-check-label">Title</label>
+                                </div>
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" value="genre" 
+                                        checked={this.state.currentFilter === 'genre'}
+                                        onChange={this.handleFilterChange}/>
+                                    <label className="form-check-label">Genre</label>
+                                </div>
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" value="company" 
+                                        checked={this.state.currentFilter === 'company'}
+                                        onChange={this.handleFilterChange}/>
+                                    <label className="form-check-label">Company</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
+
+        return toRender;
     }
 }

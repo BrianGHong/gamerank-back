@@ -1,7 +1,5 @@
-import axios from 'axios';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
-import queryString from 'query-string';
 import {Spinner} from '../Partials/Spinner';
 import './index.css';
 
@@ -12,34 +10,25 @@ export class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true,
-            resultList: []
+            resultList: [],
+            isLoading: false
         };
     }
 
     componentDidMount() {
-        const s = queryString.parse(this.props.location.search)['s'];
-        this.conductSearch(s ? s : 'all');
+        this.setState({
+            isLoading: this.props.isLoading,
+            resultList: this.props.resultList
+        });
     }
 
-    conductSearch(search) {
-        axios.request({
-            method: 'GET',
-            url: `${process.env.REACT_APP_API_URI}/search/conductSearch/${search}`
-        })
-        .then(result => {
+    componentDidUpdate() {
+        if (this.state.resultList !== this.props.resultList) {
             this.setState({
-                isLoading: false,
-                resultList: result.data
+                isLoading: this.props.isLoading,
+                resultList: this.props.resultList
             });
-        })
-        .catch(err => {
-            this.setState({
-                error: err,
-                isLoading: false,
-                resultList: []
-            });
-        });
+        }
     }
 
     render() {

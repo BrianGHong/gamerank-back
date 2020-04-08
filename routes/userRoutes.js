@@ -75,7 +75,7 @@ module.exports = function (pool) {
     // Check if user entered in correct email and password
     const checkUser = async (req, res, next) => {
         if (!req.body.email || !req.body.password) {
-            res.send({'error': 'Please enter all fields before loggin in'});
+            res.send({'error': 'Please enter all fields before logging in'});
         } else {
             const sql = `SELECT * FROM User WHERE user_email='${req.body.email}'`;
             await database.query(sql, pool)

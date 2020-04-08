@@ -14,12 +14,28 @@ export class GameCard extends React.Component {
                 r3: 0,
                 r4: 0,
                 r5: 0,
-            }
+            },
+            genres: []
         };
     }
 
     componentDidMount() {
         this.getGameScore(this.props.gameID);
+        this.getGenreNames(this.props.gameID);
+    }
+
+    // Get genrenames
+    getGenreNames = (gid) => {
+        axios.request({
+            method: 'GET',
+            url: `${process.env.REACT_APP_API_URI}/search/getGenres/${gid}`
+        })
+        .then(res => {
+            console.log(res.data.map(a => a.genre_name));
+            this.setState({
+                genres: res.data.map(a => a.genre_name)
+            })
+        }).catch(err => console.error(err));
     }
 
     // Get Game Aggregate Score
@@ -92,9 +108,9 @@ export class GameCard extends React.Component {
                                     />
                                 </div>
                             </div>
-                            {/* <div className="genres row">
-                                Action Role-playing
-                            </div> */}
+                            <div className="genres row">
+                                {this.state.genres.join(', ')}
+                            </div>
                         </div>
                     </div>
                 </Link><br />

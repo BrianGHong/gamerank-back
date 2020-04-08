@@ -55,15 +55,17 @@ let pool = mysql.createPool({
 
 // Session Getters
 app.get('/getSession', (req, res) => {
-    console.log(JSON.stringify(req.session));
     const email = req.session.user;
     if (email) {
         database.query(`SELECT username FROM User WHERE user_email='${email}'`, pool)
         .then(result => {
-            res.send({'email': req.session.user, 'username': result[0].username});
+            req.session.email = req.session.user;
+            req.session.username = result[0].username;
+            console.log('getSession', JSON.stringify(req.session));
+            res.send(req.session);
         }).catch(err => console.error(err));
     } else {
-        res.send({});
+        res.send(req.session);
     }
 });
 
