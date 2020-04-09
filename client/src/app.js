@@ -22,7 +22,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchParam: '',
+            searchParam: 'qwerty',
             filterParam: 'title',
             searchResults: [],
             goToSearchPage: false
@@ -33,13 +33,13 @@ class App extends React.Component {
 
     doSearch(s, f) {
         this.setState({
-            searchParam: s ? s : '',
+            searchParam: s ? s : 'qwerty',
             filterParam: f ? f : 'title'
         });
 
         axios.request({
             method: 'GET',
-            url: `${process.env.REACT_APP_API_URI}/search/conductSearch/${s ? s : ''}/${f ? f : 'title'}`
+            url: `${process.env.REACT_APP_API_URI}/search/conductSearch/${s ? s : 'qwerty'}/${f ? f : 'title'}`
         })
         .then(result => {
             // Update results
