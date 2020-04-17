@@ -78,10 +78,18 @@ module.exports = function (pool) {
      * GET Genres of a game
      */
     router.get("/getGenres/:gid", (req, res) => {
+        // Remove duplicate games from an array
+        const removeDuplicateGames = (arr) => {
+            return arr.filter((ele, index, self) =>
+                self.findIndex((t) => {
+                    return (t.gameID === ele.gameID);
+                }) === index);
+        }
+
         const gid = req.params.gid;
         database.query(`SELECT genre_name FROM game_details_genre WHERE gameID=${gid}`, pool)
         .then(result => {
-            res.send(result);
+            res.send(removeDuplicateGames(result));
         }).catch(err => console.error(err));
     });
 
