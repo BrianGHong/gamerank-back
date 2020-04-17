@@ -34,7 +34,7 @@ module.exports = function (pool) {
                 return database.query(`SELECT platform_type FROM Game_details_platforms WHERE gameID=${gameID}`, pool)
             }).catch(err => res.send({'error404': '404'}))
             .then(rows => {
-                for (let i in rows) {
+                for (let i in [... new Set(rows.map(data => data.platform_type))]) {
                     plat.push(rows[i]["platform_type"])
                 }
                 return database.query(`SELECT gamemode_type FROM Game_details_gamemodes WHERE gameID=${gameID}`, pool)
