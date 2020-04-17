@@ -32,7 +32,7 @@ export class GameCard extends React.Component {
         })
         .then(res => {
             this.setState({
-                genres: res.data.map(a => a.genre_name)
+                genres: res.data
             })
         }).catch(err => console.error(err));
     }
