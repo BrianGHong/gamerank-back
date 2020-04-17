@@ -31,7 +31,6 @@ export class GameCard extends React.Component {
             url: `${process.env.REACT_APP_API_URI}/search/getGenres/${gid}`
         })
         .then(res => {
-            console.log(res.data.map(a => a.genre_name));
             this.setState({
                 genres: res.data.map(a => a.genre_name)
             })

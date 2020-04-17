@@ -81,7 +81,7 @@ module.exports = function (pool) {
         const gid = req.params.gid;
         database.query(`SELECT genre_name FROM game_details_genre WHERE gameID=${gid}`, pool)
         .then(result => {
-            res.send(result);
+            res.send(removeDuplicateGames(result));
         }).catch(err => console.error(err));
     });
 
