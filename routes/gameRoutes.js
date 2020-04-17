@@ -17,7 +17,7 @@ module.exports = function (pool) {
         await database.query(`SELECT genre_name FROM Game_details_genre WHERE gameID=${gameID}`, pool)
             .then(rows => {
                 for (let i in [... new Set(rows.map(data => data.genre_name))]) {
-                    genre.push(rows[i])
+                    genre.push(rows[i]["genre_name"])
                 }
                 return database.query(`SELECT developer_name FROM Game_details_developers WHERE gameID=${gameID}`, pool)
             }).catch(err => res.send({'error404': '404'}))
