@@ -128,10 +128,16 @@ export class Navbar extends React.Component {
                                     <label className="form-check-label">Genre</label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input" type="radio" value="company" 
-                                        checked={this.state.currentFilter === 'company'}
+                                    <input className="form-check-input" type="radio" value="developer" 
+                                        checked={this.state.currentFilter === 'developer'}
                                         onChange={this.handleFilterChange}/>
-                                    <label className="form-check-label">Company</label>
+                                    <label className="form-check-label">Developer</label>
+                                </div>
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" value="publisher" 
+                                        checked={this.state.currentFilter === 'publisher'}
+                                        onChange={this.handleFilterChange}/>
+                                    <label className="form-check-label">Publisher</label>
                                 </div>
                             </div>
                         </div>
