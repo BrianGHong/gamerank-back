@@ -14,27 +14,12 @@ export class GameCard extends React.Component {
                 r3: 0,
                 r4: 0,
                 r5: 0,
-            },
-            genres: []
+            }
         };
     }
 
     componentDidMount() {
         this.getGameScore(this.props.gameID);
-        this.getGenreNames(this.props.gameID);
-    }
-
-    // Get genrenames
-    getGenreNames = (gid) => {
-        axios.request({
-            method: 'GET',
-            url: `${process.env.REACT_APP_API_URI}/search/getGenres/${gid}`
-        })
-        .then(res => {
-            this.setState({
-                genres: res.data
-            })
-        }).catch(err => console.error(err));
     }
 
     // Get Game Aggregate Score
@@ -60,6 +45,12 @@ export class GameCard extends React.Component {
             c4: "#db2100",
             c5: "#11c24c",
         }
+
+        const dateOld = this.props.dor.substring(0,10);
+        const m = parseInt(dateOld.substring(5,7));
+        const d = parseInt(dateOld.substring(8,10));
+        const y = dateOld.substring(0,4);
+        const dateNew = 'Released ' + m + '/' + d + '/' + y; 
 
         return (
             <div>
@@ -107,8 +98,8 @@ export class GameCard extends React.Component {
                                     />
                                 </div>
                             </div>
-                            <div className="genres row">
-                                {this.state.genres.join(', ')}
+                            <div><br/>
+                                <h5 style={{"color": "gray"}}>{dateNew}</h5>
                             </div>
                         </div>
                     </div>

@@ -22,22 +22,22 @@ module.exports = function (pool) {
         let query, countQuery, propname;
         switch (filter) {
             case ('genre'):
-                query = 'SELECT DISTINCT(gameID), genre_name, title, cover_details FROM game_details_genre NATURAL JOIN Game';
+                query = 'SELECT DISTINCT(gameID), genre_name, dor_details, title, cover_details FROM game_details_genre NATURAL JOIN Game';
                 countQuery = 'SELECT COUNT(*) AS count FROM game_details_genre NATURAL JOIN Game';
                 propname = 'genre_name';
                 break;
             case ('developer'):
-                query = 'SELECT DISTINCT(gameID), developer_name, title, cover_details FROM game_details_developers NATURAL JOIN Game';
+                query = 'SELECT DISTINCT(gameID), developer_name, dor_details, title, cover_details FROM game_details_developers NATURAL JOIN Game';
                 countQuery = 'SELECT COUNT(*) AS count FROM game_details_developers NATURAL JOIN Game';
                 propname = 'developer_name';
                 break;
             case ('publisher'):
-                query = 'SELECT DISTINCT(gameID), publisher_name, title, cover_details FROM game_details_publishers NATURAL JOIN Game';
+                query = 'SELECT DISTINCT(gameID), publisher_name, dor_details, title, cover_details FROM game_details_publishers NATURAL JOIN Game';
                 countQuery = 'SELECT COUNT(*) AS count FROM game_details_publishers NATURAL JOIN Game';
                 propname = 'publisher_name';
                 break;
             default:
-                query = 'SELECT gameID, title, cover_details FROM Game';
+                query = 'SELECT gameID, title, dor_details, cover_details FROM Game';
                 countQuery = 'SELECT COUNT(*) AS count FROM Game';
                 propname = 'title';
                 break;
@@ -71,17 +71,6 @@ module.exports = function (pool) {
             lastPage: 0,
             results: []
         })});
-    });
-
-    /**
-     * GET Genres of a game
-     */
-    router.get("/getGenres/:gid", (req, res) => {
-        const gid = req.params.gid;
-        database.query(`SELECT genre_name FROM game_details_genre WHERE gameID=${gid}`, pool)
-        .then(result => {
-            res.send([... new Set(result.map(data => data.genre_name))]);
-        }).catch(err => console.error(err));
     });
 
     return router;
